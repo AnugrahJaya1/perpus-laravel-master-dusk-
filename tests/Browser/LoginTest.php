@@ -13,11 +13,14 @@ class LoginTest extends DuskTestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testLogin()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                    ->assertSee('Laravel');
+            $browser->visit('/login')
+                ->type('email','user123')
+                ->type('password','user123')
+                ->press('Login')
+                ->assertSee('Hello, Gilacoding');//atau bisa pakai waitForText
         });
     }
 }
