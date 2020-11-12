@@ -33,12 +33,13 @@ class LoginTest extends DuskTestCase
                 ->clickLink("Tambah Transaksi")
                 ->press("Cari Buku")
                 ->waitForText("Cari Buku")
-                ->click("tr[data-buku_id='3']")
+                //->click("tr[data-buku_id='3']")
+                ->press("Android Application")
                 ->press("Cari Anggota")
                 ->waitForText("Cari Anggota")
                 ->click("tr[data-anggota_id='2']")
                 ->type('ket','Tulis keterangan disini')
-                ->press("Submit")
+                //->press("Submit")
                 ->waitForText("Berhasil")
                 ->assertSee("Berhasil");
         });
