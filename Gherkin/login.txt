@@ -1,0 +1,12 @@
+Feature: loginVer
+    Untuk menggunakan program
+    Pengguna harus login terlebih dahulu
+
+    Scenario: Login berhasil user
+        Given Pengguna belum Login
+        When Pengguna menekan tombol login
+        And Pengguna mengisi username dengan dipo
+        And Pengguna mengisi password dengan dipo
+        Then Berhasil masuk ke halaman "Location:../pages/user/usr.php"
+
+    
