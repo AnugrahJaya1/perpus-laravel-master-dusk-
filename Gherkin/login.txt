@@ -1,4 +1,4 @@
-Feature: loginVer
+Feature: login
     Untuk menggunakan program
     Pengguna harus login terlebih dahulu
 
