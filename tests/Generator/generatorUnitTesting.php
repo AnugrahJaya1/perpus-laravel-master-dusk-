@@ -70,7 +70,7 @@ if($fileReader){
             } else if($words[$i]==$keys[2]){ // When
                 for($j = 0; $j<sizeof($words); $j++){
                     if($words[$j]=="username"){
-                        fwrite($fileWriter, "->type('".$words[$j]."', '".$words[$j+2]."') \n \t");
+                        fwrite($fileWriter, "->type('email','".$words[$j+2]."') \n \t");
                     }
                 }
             } else if($words[$i]==$keys[3]){ //And
