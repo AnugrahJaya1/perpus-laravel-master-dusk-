@@ -24,11 +24,22 @@ if (is_dir($dir)) {
 
 
 // membuat file baru file generator
-$currPath = __DIR__;
+
 // $currPath ="../Browser";
 $words = preg_split('/\s+/',fgets($fileReader),-1,PREG_SPLIT_NO_EMPTY);
-$newFileName = $words[1];
-$fileWriter = fopen($currPath.'/'.$newFileName.'Test.php','w');
+$folderName = $words[1];
+$newFileName = $words[2];
+
+//dir untuk folder
+$dir =dirname(__DIR__).'/Browser/'.$folderName;
+
+if( is_dir($dir) === false )
+{
+    mkdir($dir);
+}
+
+// membuat file
+$fileWriter = fopen($dir.'/'.$newFileName.'Test.php','w');
 
 
 // tulis ke file
