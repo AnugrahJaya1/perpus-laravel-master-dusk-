@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('home');
 });
 */
+
+use Illuminate\Routing\Route;
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -41,5 +44,9 @@ Route::get('/laporan/trs/excel', 'LaporanController@transaksiExcel');
 Route::get('/laporan/buku', 'LaporanController@buku');
 Route::get('/laporan/buku/pdf', 'LaporanController@bukuPdf');
 Route::get('/laporan/buku/excel', 'LaporanController@bukuExcel');
+
+Route::get('/generate',function(){
+    return view('generate');
+});
 
 
