@@ -1,7 +1,6 @@
 <?php
 
-use App\User;
+use \App\User;
 
 $model=new User();
-
 ?>
