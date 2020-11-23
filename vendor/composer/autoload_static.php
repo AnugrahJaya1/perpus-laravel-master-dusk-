@@ -4399,6 +4399,11 @@ class ComposerStaticInitc75a643d74c7475359622734de76a887
         'Tests\\Browser\\LoginTest' => __DIR__ . '/../..' . '/tests/Browser/Auth/LoginTest.php',
         'Tests\\Browser\\Pages\\HomePage' => __DIR__ . '/../..' . '/tests/Browser/Pages/HomePage.php',
         'Tests\\Browser\\Pages\\Page' => __DIR__ . '/../..' . '/tests/Browser/Pages/Page.php',
+<<<<<<< HEAD
+=======
+        'Tests\\Browser\\Test' => __DIR__ . '/../..' . '/tests/Browser/Test.php',
+        'Tests\\Browser\\loginTest' => __DIR__ . '/../..' . '/tests/Generator/loginTest.php',
+>>>>>>> e7c98c581554a6ae391af82081b0cc4b956b38ea
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
         'Tests\\DuskTestCase' => __DIR__ . '/../..' . '/tests/DuskTestCase.php',
         'Tests\\Feature\\Auth\\LoginTest' => __DIR__ . '/../..' . '/tests/Feature/Auth/LoginTest.php',
