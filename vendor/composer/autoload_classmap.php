@@ -3983,11 +3983,8 @@ return array(
     'Tests\\Browser\\LoginTest' => $baseDir . '/tests/Browser/Auth/LoginTest.php',
     'Tests\\Browser\\Pages\\HomePage' => $baseDir . '/tests/Browser/Pages/HomePage.php',
     'Tests\\Browser\\Pages\\Page' => $baseDir . '/tests/Browser/Pages/Page.php',
-<<<<<<< HEAD
-=======
     'Tests\\Browser\\Test' => $baseDir . '/tests/Browser/Test.php',
     'Tests\\Browser\\loginTest' => $baseDir . '/tests/Generator/loginTest.php',
->>>>>>> e7c98c581554a6ae391af82081b0cc4b956b38ea
     'Tests\\CreatesApplication' => $baseDir . '/tests/CreatesApplication.php',
     'Tests\\DuskTestCase' => $baseDir . '/tests/DuskTestCase.php',
     'Tests\\Feature\\Auth\\LoginTest' => $baseDir . '/tests/Feature/Auth/LoginTest.php',
