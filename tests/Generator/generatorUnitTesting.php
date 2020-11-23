@@ -1,5 +1,6 @@
 <?php
 
+
 $dir="./Gherkin/";
 $namaFile = $argv[1];
 // cara panggil : php tests/Generator/generatorUnitTesting.php login
@@ -48,9 +49,22 @@ fwrite($fileWriter,"namespace Tests\Browser;\n \n");
 
 fwrite($fileWriter,"use Tests\DuskTestCase;\n");
 fwrite($fileWriter,"use Laravel\Dusk\Browser;\n");
-fwrite($fileWriter,"use Illuminate\Foundation\Testing\DatabaseMigrations;\n \n");
+fwrite($fileWriter,"use Illuminate\Foundation\Testing\DatabaseMigrations;\n");
+
+fwrite($fileWriter, "use App\User; \n \n");
 
 fwrite($fileWriter,"class ".$newFileName."Test"." extends DuskTestCase { \n \n");
+
+// fwrite($fileWriter,'private $fillable;'."\n \n");
+
+// Contruction
+// fwrite($fileWriter,"public function testContruct(){\n\t");
+// fwrite($fileWriter,'$model=new User();'."\n\t");
+// fwrite($fileWriter,'$this->fillable=$model->getFillable();'."\n");
+// fwrite($fileWriter,"}\n \n");
+
+// $model = new User();
+// $fillable = $model->getFillable();
 
 $keys =["Scenario:", "Given", "When", "And", "Then"];
 
@@ -78,7 +92,23 @@ if($fileReader){
                         fwrite($fileWriter, '$browser->visit('."'/".$words[$j+1]."') \n \t");
                     }
                 }
-            } else if($words[$i]==$keys[2]){ // When
+            } 
+            // else if($words[$i]==$keys[2] || $words[$i]==$keys[3]){
+            //     for($j = 0; $j<sizeof($words); $j++){
+            //         foreach ($atr as $fillable){
+            //             if($words[$j]==$atr){
+            //                 if($words[$j]=="username"){
+            //                     fwrite($fileWriter, "->type('email','".$words[$j+2]."') \n \t");
+            //                 }else if($words[$j]=="tombol"){
+            //                     fwrite($fileWriter, "->press('Login')\n \t");
+            //                 }else{
+            //                     fwrite($fileWriter, "->type('".$atr."', '".$words[$j+2]."') \n \t");
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+            else if($words[$i]==$keys[2]){ // When
                 for($j = 0; $j<sizeof($words); $j++){
                     if($words[$j]=="username"){
                         fwrite($fileWriter, "->type('email','".$words[$j+2]."') \n \t");
@@ -92,7 +122,8 @@ if($fileReader){
                         fwrite($fileWriter, "->press('Login')\n \t");
                     }
                 }
-            } else if($words[$i]==$keys[4]){ //Then
+            } 
+            else if($words[$i]==$keys[4]){ //Then
                 for($j = 0; $j<sizeof($words); $j++){
                     if($words[$j]=="berhasil"){
                         fwrite($fileWriter, "->assertPathIs('/home'); \n \t}); \n} \n \n");

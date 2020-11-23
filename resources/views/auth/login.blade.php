@@ -18,6 +18,10 @@
 </head>
 
 <body>
+<?php
+$model = App\User::class;
+print_r($model);
+?>
 <form method="POST" action="{{ route('login') }}">
 {{ csrf_field() }}
   <div class="container-scroller">
