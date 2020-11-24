@@ -35,10 +35,24 @@
         </tr>
         <tr>
             <td>Login</td>
-            <td><button>BTN 1</button></td>
-            <td><button>BTN 2</button></td>
+            <form action="generate" method="post">
+                <td><input type="submit" value="Submit" name="btnIPA" class="btn bg-success"></td>
+                <td></td>
+                <!-- <td><button>BTN 1</button></td>
+                <td><button>BTN 2</button></td> -->
+            </form>
+            
         </tr>
     </table>
+
+    <?php
+
+// use App\User;
+
+// $model = new User();
+//         $fill = $model->getFillable();
+//         print_r($fill);
+    ?>
 </body>
 
 </html>

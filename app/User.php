@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
        return $this->hasOne(Anggota::class);
     }
+
+    public function getFillable()
+    {
+        return $this->fillable;
+    }
 }
