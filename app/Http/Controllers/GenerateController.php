@@ -22,6 +22,9 @@ class GenerateController extends Controller
         $generateDusk = new GenerateDuskController();
         
         $namaFile = 'login'; //$argv[1];
+        // baca folder gerkin
+        // masukan semua nama file
+        // nanti di loop
         $header = $generateDusk->bacaFileHeader($namaFile);
         // // cara panggil : php tests/Generator/generatorUnitTesting.php login
         

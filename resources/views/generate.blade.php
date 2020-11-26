@@ -47,12 +47,7 @@
     </table>
 
     <?php
-        print($dir);
-// use App\User;
-
-// $model = new User();
-//         $fill = $model->getFillable();
-//         print_r($fill);
+        // print($dir);
     ?>
 </body>
 
