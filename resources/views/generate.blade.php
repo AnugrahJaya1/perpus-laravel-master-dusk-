@@ -36,6 +36,7 @@
         <tr>
             <td>Login</td>
             <form action="/generate" method="post">
+            {{ csrf_field() }}
                 <td><input type="submit" value="Submit" name="btnIPA" class="btn bg-success"></td>
                 <td></td>
                 <!-- <td><button>BTN 1</button></td>
@@ -46,7 +47,7 @@
     </table>
 
     <?php
-
+        print($dir);
 // use App\User;
 
 // $model = new User();

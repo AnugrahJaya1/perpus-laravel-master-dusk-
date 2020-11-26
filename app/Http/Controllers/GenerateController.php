@@ -9,7 +9,7 @@ use App\User;
 class GenerateController extends Controller
 {
     private $model;
-    
+
     public function  index()
     {
         // $this->model = new User();
@@ -19,50 +19,32 @@ class GenerateController extends Controller
 
     public function generateDusk()
     {
-        $dir = "./Gherkin/";
-        $namaFile = 'login';//$argv[1];
-        // cara panggil : php tests/Generator/generatorUnitTesting.php login
-        // untuk membaca file
-        if (is_dir($dir)) {
-            if ($dh = opendir($dir)) {
-                while (($file = readdir($dh)) !== false) {
-                    $str = "filename: $file : filetype: " . filetype($dir . $file) . "\n";
+        $generateDusk = new GenerateDuskController();
+        
+        $namaFile = 'login'; //$argv[1];
+        $header = $generateDusk->bacaFileHeader($namaFile);
+        // // cara panggil : php tests/Generator/generatorUnitTesting.php login
+        
+        // $words = preg_split('/\s+/', fgets($fileReader), -1, PREG_SPLIT_NO_EMPTY);
+        // $folderName = $words[1];
+        // $newFileName = $words[2];
 
-                    // cek kesamaan kata dari argumen dan nama file
-                    if (similar_text($file, $namaFile) >= 5) {
-                        $fileReader = fopen($dir . $file, 'r');
-                        system("echo " . $file);
-                        break;
-                    }
-                }
-                closedir($dh);
-            }
-        }
+        $fileReader=$header[0];
+        $folderName=$header[1];
+        $newFileName=$header[1];
 
-        // system("echo ".fgets($fileReader));
+        $generateDusk->buatFolder($folderName,$newFileName);
 
+        // // membuat file
+        $fileWriter = $generateDusk->getFileWriter();
 
-        // membuat file baru file generator
-
-        // $currPath ="../Browser";
-        $words = preg_split('/\s+/', fgets($fileReader), -1, PREG_SPLIT_NO_EMPTY);
-        $folderName = $words[1];
-        $newFileName = $words[2];
-
-        //dir untuk folder
-        $dir = dirname(__DIR__) . '/Browser/' . $folderName;
-
-        if (is_dir($dir) === false) {
-            mkdir($dir);
-        }
-
-        // membuat file
-        $fileWriter = fopen($dir . '/' . $newFileName . 'Test.php', 'w');
-
+        
 
         // tulis ke file
         fwrite($fileWriter, "<?php\n");
         fwrite($fileWriter, "namespace Tests\Browser;\n \n");
+
+        
 
         fwrite($fileWriter, "use Tests\DuskTestCase;\n");
         fwrite($fileWriter, "use Laravel\Dusk\Browser;\n");
@@ -124,6 +106,6 @@ class GenerateController extends Controller
 
         fwrite($fileWriter, "}");
 
-        return view('generate');
+        return view("generate", ["dir" => $fileReader]);
     }
 }
