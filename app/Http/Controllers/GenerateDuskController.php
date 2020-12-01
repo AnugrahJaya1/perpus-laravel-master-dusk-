@@ -78,11 +78,11 @@ class GenerateDuskController extends Controller
         $keys = ["Scenario:", "Given", "When", "And", "Then"];
 
         
-        $model = "App/".$namaModel;
-        $fillable = $model::class;
+        // $model = "App/".$namaModel;
+        // $fillable = $model::class;
         // $mode = $namaModel::class();
 
-        $mode = get_class(new $model);
+        // $mode = get_class(new $model);
 
         $banyakTest = 1;
         $status = "";
