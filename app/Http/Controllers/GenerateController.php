@@ -49,7 +49,9 @@ class GenerateController extends Controller
         // tulis ke file
         $generateDusk->writeBody($fileWriter, $newFileName, $fileReader, $namaModel);
 
-
-        return view("generate", ["dir" => $newFileName]);
+        // $model = "App\\".$namaModel;
+        // $m = new $model;
+        // $fillable = $m->getFillable();
+        return view("generate", ["dir" => "test"]);
     }
 }

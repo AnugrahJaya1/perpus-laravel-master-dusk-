@@ -13,8 +13,8 @@ class GenerateDuskController extends Controller
 
     public function __construct()
     {
-        $this->dir = "../Gherkin/";
-        $this->newDir = '../../../tests/Browser/';
+        $this->dir = "..\\Gherkin\\";
+        $this->newDir = '..\\..\\..\\tests/Browser\\';
     }
 
     public function bacaFileHeader($namaFile)
@@ -82,14 +82,10 @@ class GenerateDuskController extends Controller
         $class = "Class".$namaModel;
         
 
-        $model = "app/".$namaModel;
-        // $obj = new $namaModel;
-        // $a = App::make($namaModel);
-        // $fillable = $model::class;
-        // $mode = $namaModel::class();
-
-        // $mode = get_class(new $model);
-
+        $model = "App\\".$namaModel;
+        $m = new $model;
+        $fillable = $m->getFillable();
+        
         $banyakTest = 1;
         $status = "";
 
@@ -139,5 +135,6 @@ class GenerateDuskController extends Controller
         }
 
         fwrite($fileWriter, "}");
+        
     }
 }

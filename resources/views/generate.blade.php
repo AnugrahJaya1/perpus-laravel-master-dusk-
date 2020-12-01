@@ -50,7 +50,7 @@
 
 use App\User;
 
-print($dir);
+print_r($dir);
         // print(new ReflectionClass("User"))
     ?>
 </body>
