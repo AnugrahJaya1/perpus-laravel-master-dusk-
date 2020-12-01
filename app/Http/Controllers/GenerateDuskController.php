@@ -64,30 +64,34 @@ class GenerateDuskController extends Controller
         return $this->fileWriter;
     }
 
-    public function writeBody($fileWriter, $newFileName, $fileReader, $namaModel)
+    private function write($text){
+        fwrite($this->fileWriter, $text);
+    }
+
+    public function writeBody($newFileName, $fileReader, $namaModel)
     {
         //header body
-        fwrite($fileWriter, "<?php\n");
-        fwrite($fileWriter, "namespace Tests\Browser;\n \n");
+        $this->write("<?php\n");
+        $this->write("namespace Tests\Browser;\n \n");
 
-        fwrite($fileWriter, "use Tests\DuskTestCase;\n");
-        fwrite($fileWriter, "use Laravel\Dusk\Browser;\n");
-        fwrite($fileWriter, "use Illuminate\Foundation\Testing\DatabaseMigrations;\n \n");
+        $this->write("use Tests\DuskTestCase;\n");
+        $this->write("use Laravel\Dusk\Browser;\n");
+        $this->write("use Illuminate\Foundation\Testing\DatabaseMigrations;\n \n");
 
-        fwrite($fileWriter, "class " . $newFileName . "Test" . " extends DuskTestCase { \n \n");
+        $this->write("class " . $newFileName . "Test" . " extends DuskTestCase { \n \n");
+
 
         // atribut bantuan
         $keys = ["Scenario:", "Given", "When", "And", "Then"];
 
-        $class = "Class".$namaModel;
-        
+        $pathModel = "App\\" . $namaModel;
+        $model = new $pathModel;
+        $fillable = $model->getFillable();
 
-        $model = "App\\".$namaModel;
-        $m = new $model;
-        $fillable = $m->getFillable();
-        
         $banyakTest = 1;
         $status = "";
+
+        $used = [];
 
         if ($fileReader) {
             while (($line = fgets($fileReader)) !== false) {
@@ -97,44 +101,51 @@ class GenerateDuskController extends Controller
                 // idx untuk words
                 for ($i = 0; $i < sizeof($words); $i++) {
                     if ($words[$i] == $keys[0]) { // Scenario:
-                        fwrite($fileWriter, "public function testUnit" . $banyakTest . "(){\n \t");
-                        fwrite($fileWriter, '$this->browse(function (Browser $browser)' . "{\n \t");
+                        $this->write("public function testUnit" . $banyakTest . "(){\n \t");
+                        $this->write('$this->browse(function (Browser $browser)' . "{\n \t");
+
                         $banyakTest = $banyakTest + 1;
                         $status = $words[$i + 2];
+                        $used = [];
                     } else if ($words[$i] == $keys[1]) { // Given
                         for ($j = 0; $j < sizeof($words); $j++) {
                             if ($words[$j] == "halaman") {
-                                fwrite($fileWriter, '$browser->visit(' . "'/" . $words[$j + 1] . "') \n \t");
+                                $this->write('$browser->visit(' . "'/" . $words[$j + 1] . "') \n \t");
                             }
                         }
-                    } else if ($words[$i] == $keys[2]) { // When
+                    } else if ($words[$i] == $keys[2] || $words[$i] == $keys[3]) { // When
                         for ($j = 0; $j < sizeof($words); $j++) {
-                            if ($words[$j] == "username") {
-                                fwrite($fileWriter, "->type('email','" . $words[$j + 2] . "') \n \t");
+                            foreach ($fillable as $atr) {
+                                if ($words[$j] == $atr) {
+                                    if (in_array($words[$j], $used) == false) {
+                                        if ($words[$j] == "username") {
+                                            $this->write("->type('email','" . $words[$j + 2] . "') \n \t");
+                                            array_push($used, "email", $words[$j]);
+                                        } else {
+                                            $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
+                                            array_push($used, $words[$j]);
+                                        }
+                                    }
+                                }
+
+                                
                             }
-                        }
-                    } else if ($words[$i] == $keys[3]) { //And
-                        for ($j = 0; $j < sizeof($words); $j++) {
-                            if ($words[$j] == "password") {
-                                fwrite($fileWriter, "->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
-                            } else if ($words[$j] == "tombol") {
-                                fwrite($fileWriter, "->press('Login')\n \t");
+                            if ($words[$j] == "tombol") {
+                                $this->write("->press('Login')\n \t");
                             }
                         }
                     } else if ($words[$i] == $keys[4]) { //Then
                         for ($j = 0; $j < sizeof($words); $j++) {
                             if ($words[$j] == "berhasil") {
-                                fwrite($fileWriter, "->assertPathIs('/home'); \n \t}); \n} \n \n");
+                                $this->write("->assertPathIs('/home'); \n \t}); \n} \n \n");
                             } else if ($words[$j] == "tulisan") {
-                                fwrite($fileWriter, "->assertPathIs('/login'); \n \t}); \n} \n \n");
+                                $this->write("->assertPathIs('/login'); \n \t}); \n} \n \n");
                             }
                         }
                     }
                 }
             }
         }
-
-        fwrite($fileWriter, "}");
-        
+        $this->write("}");
     }
 }

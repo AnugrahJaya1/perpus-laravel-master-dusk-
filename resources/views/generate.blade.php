@@ -36,22 +36,26 @@
         <tr>
             <td>Login</td>
             <form action="/generate" method="post">
-            {{ csrf_field() }}
+                {{ csrf_field() }}
                 <td><input type="submit" value="Submit" name="btnIPA" class="btn bg-success"></td>
                 <td></td>
                 <!-- <td><button>BTN 1</button></td>
                 <td><button>BTN 2</button></td> -->
             </form>
-            
+
         </tr>
     </table>
 
     <?php
 
-use App\User;
 
-print_r($dir);
-        // print(new ReflectionClass("User"))
+    // print_r($dir);
+    // foreach ($dir as $d) {
+    //     if ("email" == $d) {
+    //         print($d);
+    //         echo "<br>";
+    //     }
+    // }
     ?>
 </body>
 
