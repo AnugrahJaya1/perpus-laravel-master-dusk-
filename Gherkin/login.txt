@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Feature: loginVer
+=======
+Feature: Auth Login
+>>>>>>> 5e25bcafc78be4f00b50db6ab148406814913adf
     Untuk menggunakan program
     Pengguna harus login terlebih dahulu
 
@@ -28,6 +32,10 @@ Feature: loginVer
         When Pengguna mengisi username dengan user123
         And Pengguna mengisi password dengan user122
         And Pengguna menekan tombol Login
+<<<<<<< HEAD
         Then Akan muncul tulisan "These credentials do not match our records." 
 
     
+=======
+        Then Akan muncul tulisan "These credentials do not match our records." 
+>>>>>>> 5e25bcafc78be4f00b50db6ab148406814913adf

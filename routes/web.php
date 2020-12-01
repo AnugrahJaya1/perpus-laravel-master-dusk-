@@ -42,8 +42,14 @@ Route::get('/laporan/buku', 'LaporanController@buku');
 Route::get('/laporan/buku/pdf', 'LaporanController@bukuPdf');
 Route::get('/laporan/buku/excel', 'LaporanController@bukuExcel');
 
+<<<<<<< HEAD
 // Route::get('/generate','generateController@index');
 
 Route::get('/generate',function(){
     return view('generate');
 });
+=======
+Route::post('/generate', 'generateController@generateDusk');
+
+Route::get('/generate', 'generateController@index');
+>>>>>>> 5e25bcafc78be4f00b50db6ab148406814913adf

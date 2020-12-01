@@ -35,10 +35,32 @@
         </tr>
         <tr>
             <td>Login</td>
+<<<<<<< HEAD
             <td><button>BTN 1</button></td>
             <td><button>BTN 2</button></td>
         </tr>
     </table>
+=======
+            <form action="/generate" method="post">
+            {{ csrf_field() }}
+                <td><input type="submit" value="Submit" name="btnIPA" class="btn bg-success"></td>
+                <td></td>
+                <!-- <td><button>BTN 1</button></td>
+                <td><button>BTN 2</button></td> -->
+            </form>
+            
+        </tr>
+    </table>
+
+    <?php
+        print($dir);
+// use App\User;
+
+// $model = new User();
+//         $fill = $model->getFillable();
+//         print_r($fill);
+    ?>
+>>>>>>> 5e25bcafc78be4f00b50db6ab148406814913adf
 </body>
 
 </html>
