@@ -38,7 +38,7 @@ class GenerateController extends Controller
 
         $fileReader=$header[0];
         $folderName=$header[1];
-        $newFileName=$header[1];
+        $newFileName=$header[2];
         $namaModel = $header[3];
 
         $generateDusk->buatFolder($folderName,$newFileName);
@@ -49,6 +49,7 @@ class GenerateController extends Controller
         // tulis ke file
         $generateDusk->writeBody($fileWriter, $newFileName, $fileReader, $namaModel);
 
-        return view("generate", ["dir" => $namaModel]);
+
+        return view("generate", ["dir" => $newFileName]);
     }
 }

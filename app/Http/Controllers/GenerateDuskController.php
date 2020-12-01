@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App;
+use Illuminate\Support\Facades\App as FacadesApp;
 
 class GenerateDuskController extends Controller
 {
@@ -77,8 +79,12 @@ class GenerateDuskController extends Controller
         // atribut bantuan
         $keys = ["Scenario:", "Given", "When", "And", "Then"];
 
+        $class = "Class".$namaModel;
         
-        // $model = "App/".$namaModel;
+
+        $model = "app/".$namaModel;
+        // $obj = new $namaModel;
+        // $a = App::make($namaModel);
         // $fillable = $model::class;
         // $mode = $namaModel::class();
 

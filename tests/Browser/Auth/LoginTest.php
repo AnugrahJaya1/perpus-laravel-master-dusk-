@@ -5,7 +5,7 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
  
-class AuthTest extends DuskTestCase { 
+class LoginTest extends DuskTestCase { 
  
 public function testUnit1(){
  	$this->browse(function (Browser $browser){

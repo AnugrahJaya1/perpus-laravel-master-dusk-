@@ -47,7 +47,11 @@
     </table>
 
     <?php
-        print($dir);
+
+use App\User;
+
+print($dir);
+        // print(new ReflectionClass("User"))
     ?>
 </body>
 
