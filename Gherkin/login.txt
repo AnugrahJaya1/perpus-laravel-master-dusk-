@@ -1,4 +1,4 @@
-Feature: Auth Login
+Feature: Auth Login User
     Untuk menggunakan program
     Pengguna harus login terlebih dahulu
 

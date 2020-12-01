@@ -47,7 +47,7 @@
     </table>
 
     <?php
-        // print($dir);
+        print($dir);
     ?>
 </body>
 
