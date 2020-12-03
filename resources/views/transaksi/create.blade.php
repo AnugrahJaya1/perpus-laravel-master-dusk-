@@ -129,7 +129,7 @@
                         <div class="form-group{{ $errors->has('ket') ? ' has-error' : '' }}">
                             <label for="ket" class="col-md-4 control-label">Keterangan</label>
                             <div class="col-md-6">
-                                <input id="ket" type="text" class="form-control" name="ket" value="{{ old('ket') }}">
+                                <input id="ket" type="text" class="form-control" name="keterangan" value="{{ old('ket') }}">
                                 @if ($errors->has('ket'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('ket') }}</strong>

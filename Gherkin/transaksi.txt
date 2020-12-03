@@ -1,0 +1,14 @@
+Feature: Transaksi
+    Bagi pengguna yang ingin meminjam buku
+    Fitur transaksi menambah data peminjaman buku oleh user
+
+    Scenario: Berhasil tambah transaksi
+        Given Pengguna sudah login
+        When Pengguna klik link Transaksi
+        And Pengguna klik link Tambah Transaksi
+        And Pengguna menekan tombol Cari buku
+        And Pengguna memilih buku Android Application
+        And Pengguna memilih nama Muhammad Dipo
+        And Pengguna mililih keterangan Pinjam
+        And Pengguna menekan tombol Submit
+        Then Akan muncul tulisan Berhasil
