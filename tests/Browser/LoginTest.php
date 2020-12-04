@@ -69,25 +69,25 @@ class LoginTest extends DuskTestCase
     /**
      * Test fitur tambah anggota
      */
-    public function testTambahAnggota(){
+    // public function testTambahAnggota(){
 
-        $this->browse(function (Browser $browser) {
-            $browser->clickLink('Master Data')
-                ->clickLink('Data Anggota')
-                ->clickLink('Tambah Anggota')
-                ->type('nama','Muhammad Dipo')
-                ->type('npm','2016730091')
-                ->type('tempat_lahir','Bandung')
-                ->keys('#tgl_lahir', '4271998')
-                ->select('jenis_kelamin','Laki-Laki')
-                ->select('prodi','TI')
-                ->select('user_id','Test');
-                //->press('Submit');
-        });
-        // $this->assertDatabaseHas('anggota', [
-        //     'npm' => '2016730091'
-        // ]);
-    }
+    //     $this->browse(function (Browser $browser) {
+    //         $browser->clickLink('Master Data')
+    //             ->clickLink('Data Anggota')
+    //             ->clickLink('Tambah Anggota')
+    //             ->type('nama','Test')
+    //             ->type('npm','000001')
+    //             ->type('tempat_lahir','Bandung')
+    //             ->keys('#tgl_lahir', '4271998')
+    //             ->select('jenis_kelamin','Laki-Laki')
+    //             ->select('prodi','TI')
+    //             ->select('user_id','6')
+    //             ->press('Submit');
+    //     });
+    //     $this->assertDatabaseHas('anggota', [
+    //         'npm' => '000001'
+    //     ]);
+    // }
     
 
     // /**

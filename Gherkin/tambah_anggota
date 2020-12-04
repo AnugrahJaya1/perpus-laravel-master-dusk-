@@ -13,7 +13,7 @@ Feature: Anggota
     And Pengguna memilih tanggal_lahir dengan 4271998
     And Pengguna menekan opsi jenis_kelamin Laki-Laki
     And Pengguna menekan opsi prodi TI 
-    And Pengguna menekan opsi user_id Test
+    And Pengguna menekan opsi user_id 6
     And Pengguna menekan tombol Submit
     Then Pengguna dengan npm 0000001 terdaftar pada tabel anggota 
 
