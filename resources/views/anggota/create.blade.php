@@ -72,10 +72,10 @@ $(document).ready(function() {
                         <div class="form-group{{ $errors->has('level') ? ' has-error' : '' }}">
                             <label for="level" class="col-md-4 control-label">Jenis Kelamin</label>
                             <div class="col-md-6">
-                            <select class="form-control" name="jk" required="">
+                            <select class="form-control" name="jenis_kelamin" required="">
                                 <option value=""></option>
-                                <option value="L">Laki - Laki</option>
-                                <option value="P">Perempuan</option>
+                                <option value="Laki-Laki">Laki-Laki</option>
+                                <option value="Perempuan">Perempuan</option>
                             </select>
                             </div>
                         </div>
@@ -98,7 +98,7 @@ $(document).ready(function() {
                             <select class="form-control" name="user_id" required="">
                                 <option value="">(Cari User)</option>
                                 @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                    <option value="{{$user->name}}">{{$user->name}}</option>
                                 @endforeach
                             </select>
                             </div>
