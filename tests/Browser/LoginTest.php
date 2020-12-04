@@ -26,57 +26,35 @@ class LoginTest extends DuskTestCase
     /**
      * test tambah transaksi
      */
-    public function testTransaksi()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->clickLink('Transaksi')
-                ->clickLink("Tambah Transaksi")
-                ->press("Cari Buku")
-                ->waitForText("Cari Buku")
-                ->click("tr[data-buku_judul='Pemrograman Android']")
-                ->press("Cari Anggota")
-                ->click("tr[data-anggota_nama='Muhammad Dipo']")
-                ->type('keterangan','Pinjam')
-                ->press("Submit")
-                ->assertSee("Berhasil");
-        });
-    }
-    /**
-     * Test fitur tambah anggota
-     */
-    // public function testTambahAnggota(){
-
+    // public function testTransaksi()
+    // {
     //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/anggota')
-    //             ->clickLink('Tambah Anggota')
-    //             ->type('nama','Muhammad Dipo')
-    //             ->type('npm','2016730091')
-    //             ->type('tempat_lahir','Bandung')
-    //             ->keys('#tgl_lahir', '4271998')
-    //             ->select('jk','L')
-    //             ->select('prodi','TI')
-    //             ->select('user_id','3')
-    //             ->press('Submit');
+    //         $browser->clickLink('Transaksi')
+    //             ->clickLink("Tambah Transaksi")
+    //             ->press("Cari Buku")
+    //             ->waitForText("Cari Buku")
+    //             ->click("tr[data-buku_judul='Pemrograman Android']")
+    //             ->press("Cari Anggota")
+    //             ->click("tr[data-anggota_nama='Muhammad Dipo']")
+    //             ->type('keterangan','Pinjam')
+    //             ->press("Submit")
+    //             ->assertSee("Berhasil");
     //     });
-    //     $this->assertDatabaseHas('anggota', [
-    //         'npm' => '2016730091'
-    //     ]);
     // }
-    // /**
+
+    //**
     //  * Test fitur tambah user
     //  */
     // public function testTambahUser()
     // {
     //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/login')
-    //             ->type('email','admin123')
-    //             ->type('password','admin123')
-    //             ->press('Login')
-    //             ->visit('/user')
+    //         $browser->clickLink('Master Data')
+    //             ->clickLink('Data User')
     //             ->clickLink("Tambah User")
     //             ->type('name','Test')
     //             ->type('username','test')
     //             ->type('email','test@gmail.com')
+    //             ->attach('gambar',base_path('public/images/user/kodekiddo.png'))
     //             ->select('level','user')
     //             ->type('password','password')
     //             ->type('password_confirmation','password')
@@ -87,6 +65,29 @@ class LoginTest extends DuskTestCase
     //             ]);
     //     });
     // }
+
+    /**
+     * Test fitur tambah anggota
+     */
+    public function testTambahAnggota(){
+
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/anggota')
+                ->clickLink('Tambah Anggota')
+                ->type('nama','Muhammad Dipo')
+                ->type('npm','2016730091')
+                ->type('tempat_lahir','Bandung')
+                ->keys('#tgl_lahir', '4271998')
+                ->select('jk','L')
+                ->select('prodi','TI')
+                ->select('user_id','3')
+                ->press('Submit');
+        });
+        $this->assertDatabaseHas('anggota', [
+            'npm' => '2016730091'
+        ]);
+    }
+    
 
     // /**
     //  * Test fitur tambah buku (admin)
