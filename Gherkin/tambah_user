@@ -10,7 +10,7 @@ Feature: User
     And Pengguna mengisi name dengan Test
     And Pengguna mengisi username dengan test
     And Pengguna mengisi email dengan test@gmail.com
-    And Pengguna melampirkan gambar dengan kodekiddo
+    And Pengguna melampirkan gambar user dengan kodekiddo
     And Pengguna menekan opsi level user
     And Pengguna mengisi password dengan password
     And Pengguna mengisi password_confirmation dengan password

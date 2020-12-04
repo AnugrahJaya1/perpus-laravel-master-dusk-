@@ -97,12 +97,13 @@ class LoginTest extends DuskTestCase
     // public function testTambahBuku()
     // {
     //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/buku')
-    //         ->clickLink("Tambah Buku")
+    //         $browser->clickLink('Master Data')
+    //         ->clickLink('Data Buku')
+    //         ->clickLink('Tambah Buku')
     //         ->type('judul','Pemrograman Python')
     //         ->type('isbn','123456789')
     //         ->type('pengarang','Muhammad Dipo')
-    //         ->type('penerbit','PT.Muhammad Dipo')
+    //         ->type('penerbit','PT Muhammad Dipo')
     //         ->type('tahun_terbit','2015')
     //         ->type('jumlah_buku','5')
     //         ->type('deskripsi','Buku untuk belajar Bahasa Pemrograman Python')
@@ -116,17 +117,17 @@ class LoginTest extends DuskTestCase
     //     });
     // }
 
-    // /**
-    //  * Test fitur Log Out
-    //  */
-    // public function testLogout()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->clickLink('Dipo')
-    //         ->clickLink('Sign Out')
-    //         ->assertPathIs('/login');
-    //     });
-    // }
+    /**
+     * Test fitur Log Out
+     */
+    public function testLogout()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->clickLink('Hello')
+            ->clickLink('Sign Out')
+            ->assertPathIs('/login');
+        });
+    }
 
     
     

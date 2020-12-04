@@ -1,0 +1,8 @@
+Feature: Auth Logout User
+    Logout pengguna dari akunnya
+
+    Scenario: Berhasil logout
+        Given Pengguna sudah login
+        When Pengguna menekan link Hello
+        And Pengguna menekan link Sign Out
+        Then Pengguna berhasil masuk ke halaman login
