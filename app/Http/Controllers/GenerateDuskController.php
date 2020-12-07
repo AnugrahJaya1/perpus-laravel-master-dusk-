@@ -83,7 +83,7 @@ class GenerateDuskController extends Controller
 
 
         // atribut bantuan
-        $keys = ["Scenario:", "Given", "When", "And", "Then"];
+        $keys = ["Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan"];
 
         $pathModel = "App\\" . $namaModel;
         $model = new $pathModel;
@@ -110,7 +110,7 @@ class GenerateDuskController extends Controller
                         $used = [];
                     } else if ($words[$i] == $keys[1]) { // Given
                         for ($j = 0; $j < sizeof($words); $j++) {
-                            if ($words[$j] == "halaman") {
+                            if ($words[$j] == $keys[5]) { // halaman
                                 $this->write('$browser->visit(' . "'/" . $words[$j + 1] . "') \n \t");
                             }
                         }
@@ -124,15 +124,15 @@ class GenerateDuskController extends Controller
                                     }
                                 }
                             }
-                            if ($words[$j] == "tombol") {
+                            if ($words[$j] == $keys[6]) { //tombol
                                 $this->write("->press('Login')\n \t");
                             }
                         }
                     } else if ($words[$i] == $keys[4]) { //Then
                         for ($j = 0; $j < sizeof($words); $j++) {
-                            if ($words[$j] == "berhasil") {
+                            if ($words[$j] == $keys[7]) { //berhasil
                                 $this->write("->assertPathIs('/home'); \n \t}); \n} \n \n");
-                            } else if ($words[$j] == "tulisan") {
+                            } else if ($words[$j] == $keys[8]) { //tulisan
                                 $this->write("->assertPathIs('/login'); \n \t}); \n} \n \n");
                             }
                         }
