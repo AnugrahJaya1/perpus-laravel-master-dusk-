@@ -64,7 +64,8 @@ class GenerateDuskController extends Controller
         return $this->fileWriter;
     }
 
-    private function write($text){
+    private function write($text)
+    {
         fwrite($this->fileWriter, $text);
     }
 
@@ -118,17 +119,10 @@ class GenerateDuskController extends Controller
                             foreach ($fillable as $atr) {
                                 if ($words[$j] == $atr) {
                                     if (in_array($words[$j], $used) == false) {
-                                        if ($words[$j] == "username") {
-                                            $this->write("->type('email','" . $words[$j + 2] . "') \n \t");
-                                            array_push($used, "email", $words[$j]);
-                                        } else {
-                                            $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
-                                            array_push($used, $words[$j]);
-                                        }
+                                        $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
+                                        array_push($used, $words[$j]);
                                     }
                                 }
-
-                                
                             }
                             if ($words[$j] == "tombol") {
                                 $this->write("->press('Login')\n \t");
