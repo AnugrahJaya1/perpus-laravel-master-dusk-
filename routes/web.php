@@ -45,3 +45,5 @@ Route::get('/laporan/buku/excel', 'LaporanController@bukuExcel');
 Route::post('/generate', 'generateController@generateDusk');
 
 Route::get('/generate', 'generateController@index');
+
+Route::get('/test', 'ReaderWriterController@bacaNamaFile');
