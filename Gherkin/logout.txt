@@ -2,7 +2,7 @@ Feature: Auth Logout User
     Logout pengguna dari akunnya
 
     Scenario: Berhasil logout
-        Given Pengguna sudah login
+        Given Pengguna sudah login menggunakan username admin123
         When Pengguna menekan link Hello
         And Pengguna menekan link Sign Out
         Then Pengguna berhasil masuk ke halaman login

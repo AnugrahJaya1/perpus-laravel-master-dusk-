@@ -3,7 +3,7 @@ Feature: Anggota
     Data anggota dibutuhkan jika pengguna ingin meminjam buku
 
     Scenario: Berhasil tambah anggota
-    Given Pengguna sudah login
+    Given Pengguna sudah login menggunakan username admin123
     When Pengguna menekan link Master Data
     And Pengguna menekan link Data Anggota
     And Pengguna menekan link Tambah Anggota

@@ -3,7 +3,7 @@ Feature: User
     Data user dibutuhkan jika pengguna ingin meminjam buku
 
     Scenario: Berhasil tambah user
-    Given Pengguna sudah login
+    Given Pengguna sudah login menggunakan username admin123
     When Pengguna menekan link Master Data
     And Pengguna menekan link Data User
     And Pengguna menekan link Tambah User

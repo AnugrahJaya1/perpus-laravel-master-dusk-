@@ -3,7 +3,7 @@ Feature: Buku
     Data buku baru yang bisa dipinjam oleh pengguna
 
     Scenario: Berhasil tambah buku
-    Given Pengguna sudah login
+    Given Pengguna sudah login menggunakan username admin123
     When Pengguna menekan link Master Data
     And Pengguna menekan link Data Buku
     And Pengguna menekan link Tambah Buku

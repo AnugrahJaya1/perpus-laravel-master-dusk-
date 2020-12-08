@@ -3,7 +3,7 @@ Feature: Transaksi
     Fitur transaksi menambah data peminjaman buku oleh user
 
     Scenario: Berhasil tambah transaksi
-        Given Pengguna sudah login
+        Given Pengguna sudah login menggunakan username admin123
         When Pengguna menekan link Transaksi
         And Pengguna menekan link Tambah Transaksi
         And Pengguna menekan tombol Cari buku
