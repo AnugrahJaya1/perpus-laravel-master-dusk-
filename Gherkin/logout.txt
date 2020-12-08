@@ -3,6 +3,6 @@ Feature: Auth Logout User
 
     Scenario: Berhasil logout
         Given Pengguna sudah login menggunakan username admin123
-        When Pengguna menekan link Hello
+        When Pengguna menekan link Hello, Gilacoding
         And Pengguna menekan link Sign Out
         Then Pengguna berhasil masuk ke halaman login

@@ -83,7 +83,11 @@ class GenerateDuskController extends Controller
 
 
         // atribut bantuan
-        $keys = ["Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", "login", "menggunakan", "link" ,"opsi", "atribut", "melampirkan"];
+        $keys = [
+            "Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", "login", "menggunakan", "link",
+            "opsi", "atribut", "melampirkan", "memilih"
+        ];
+
 
         $pathModel = "App\\" . $namaModel;
         $model = new $pathModel;
@@ -113,7 +117,7 @@ class GenerateDuskController extends Controller
                             if ($words[$j] == $keys[5]) { // halaman
                                 $this->write('$browser->visit(' . "'/" . $words[$j + 1] . "') \n \t");
                             } else if ($words[$j] == $keys[9] && $words[$j + 1] == $keys[10]) { // login & menggunakan
-                                $this->write('$browser->loginAs('."'".$words[$j+3]."') \n \t");
+                                $this->write('$browser->loginAs(' . "'" . $words[$j + 3] . "') \n \t");
                                 break;
                             }
                         }
@@ -122,23 +126,39 @@ class GenerateDuskController extends Controller
                             foreach ($fillable as $atr) {
                                 if ($words[$j] == $atr) {
                                     if (in_array($words[$j], $used) == false) {
-                                        $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
+                                        // $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
+                                        // $this->write($words[$j+2]);
+                                        if ($words[$j - 1] == $keys[12]) {
+                                            $this->write("->select('" . $words[$j] . "','" . $words[$j + 1] . "')\n \t");
+                                        } else {
+                                            $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
+                                        }
                                         array_push($used, $words[$j]);
                                     }
                                 }
                             }
+
                             if ($words[$j] == $keys[6]) { //tombol
-                                $this->write("->press('Login')\n \t");
-                            } else if($words[$j] == $keys[11]){ //link
-                                $this->write("->clickLink('".$words[$j+1]."')\n \t");
+                                $this->write("->press('" . $words[$j + 1] . "');\n \t");
+                            } else if ($words[$j] == $keys[11]) { //link
+                                $this->write("->clickLink('" . $words[$j + 1] . " " . $words[$j + 2] . "')\n \t");
+                            } else if ($words[$j] == $keys[15]) { //mengisi
+                                $this->write("->keys('#" . $words[$j + 1] . "','" . $words[$j + 3] . "')\n \t");
+                            } else if ($words[$j] == $keys[12]) {
+                                $this->write("->select('" . $words[$j + 1] . "','" . $words[$j + 2] . "')\n \t");
                             }
                         }
                     } else if ($words[$i] == $keys[4]) { //Then
                         for ($j = 0; $j < sizeof($words); $j++) {
                             if ($words[$j] == $keys[7]) { //berhasil
-                                $this->write("->assertPathIs('/".$words[sizeof($words)-1]."'); \n \t}); \n} \n \n");
+                                $this->write("->assertPathIs('/" . $words[sizeof($words) - 1] . "'); \n \t}); \n} \n \n");
                             } else if ($words[$j] == $keys[8]) { //tulisan
                                 $this->write("->assertPathIs('/login'); \n \t}); \n} \n \n");
+                            } else if ($words[$j] == $keys[13]) { //atribut
+                                $this->write("});\n \t");
+                                $this->write('$this'."->assertDatabaseHas('".$words[sizeof($words)-1]."',[ \n \t");
+                                $this->write("'".$words[$j+1]."' => "."'".$words[$j+2]."'\n\t");
+                                $this->write("]);\n \t \n} \n \n");
                             }
                         }
                     }
