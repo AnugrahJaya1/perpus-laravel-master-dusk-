@@ -83,7 +83,7 @@ class GenerateDuskController extends Controller
 
 
         // atribut bantuan
-        $keys = ["Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan"];
+        $keys = ["Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", "login", "menggunakan", "link" ,"opsi", "atribut", "melampirkan"];
 
         $pathModel = "App\\" . $namaModel;
         $model = new $pathModel;
@@ -112,9 +112,12 @@ class GenerateDuskController extends Controller
                         for ($j = 0; $j < sizeof($words); $j++) {
                             if ($words[$j] == $keys[5]) { // halaman
                                 $this->write('$browser->visit(' . "'/" . $words[$j + 1] . "') \n \t");
+                            } else if ($words[$j] == $keys[9] && $words[$j + 1] == $keys[10]) { // login & menggunakan
+                                $this->write('$browser->loginAs('."'".$words[$j+3]."') \n \t");
+                                break;
                             }
                         }
-                    } else if ($words[$i] == $keys[2] || $words[$i] == $keys[3]) { // When
+                    } else if ($words[$i] == $keys[2] || $words[$i] == $keys[3]) { // When & And
                         for ($j = 0; $j < sizeof($words); $j++) {
                             foreach ($fillable as $atr) {
                                 if ($words[$j] == $atr) {
@@ -126,12 +129,14 @@ class GenerateDuskController extends Controller
                             }
                             if ($words[$j] == $keys[6]) { //tombol
                                 $this->write("->press('Login')\n \t");
+                            } else if($words[$j] == $keys[11]){ //link
+                                $this->write("->clickLink('".$words[$j+1]."')\n \t");
                             }
                         }
                     } else if ($words[$i] == $keys[4]) { //Then
                         for ($j = 0; $j < sizeof($words); $j++) {
                             if ($words[$j] == $keys[7]) { //berhasil
-                                $this->write("->assertPathIs('/home'); \n \t}); \n} \n \n");
+                                $this->write("->assertPathIs('/".$words[sizeof($words)-1]."'); \n \t}); \n} \n \n");
                             } else if ($words[$j] == $keys[8]) { //tulisan
                                 $this->write("->assertPathIs('/login'); \n \t}); \n} \n \n");
                             }

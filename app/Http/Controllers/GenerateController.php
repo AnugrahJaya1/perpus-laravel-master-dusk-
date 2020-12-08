@@ -52,7 +52,7 @@ class GenerateController extends Controller
 
 
 
-        $namaFile = 'login'; //$argv[1];
+        $namaFile = 'logout'; //$argv[1];
         // baca folder gerkin
         // masukan semua nama file
         // nanti di loop
