@@ -18,4 +18,9 @@ class Transaksi extends Model
     {
     	return $this->belongsTo(Buku::class);
     }
+
+    public function getFillable()
+    {
+        return $this->fillable;
+    }
 }

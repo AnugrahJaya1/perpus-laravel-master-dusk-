@@ -17,42 +17,22 @@ class GenerateController extends Controller
 
     public function  index()
     {
-        $model = "App\\" . "User";
-        $m = new $model;
-        $fillable = $m->getFillable();
-        return view("generate");
-        // return view('generate', ["dir" => "test"]);
+        // $model = "App\\" . "User";
+        // $m = new $model;
+        // $fillable = $m->getFillable();
+        // return view("generate");
+        return view('generate', ["dir" => "test"]);
     }
 
     public function generateDusk()
     {
         $generateDusk = new GenerateDuskController();
 
-        // $namaFile = $this->readerWriter->bacaNamaFile();
-
-        // for ($i = 2; $i < sizeof($namaFile); $i++) {
-        //     $temp = $namaFile[$i]; // nama file
-        //     $this->readerWriter->setFileReader($temp);
-        //     $fileReader = $this->readerWriter->getFileReader();
-
-        //     $header = $this->readerWriter->bacaFileHeader($fileReader);
-
-        //     $folderName = $header[0];
-        //     $newFileName = $header[1];
-        //     $namaModel = $header[2];
-
-        //     $generateDusk->buatFolder($folderName, $newFileName);
-
-        //     $generateDusk->writeBody($newFileName, $fileReader, $namaModel);
-
-        //     $model = "App\\" . $namaModel;
-        //     $m = new $model;
-        //     $fillable = $m->getFillable();
-        // }
+        
 
 
 
-        $namaFile = 'tambah_anggota'; //$argv[1];
+        $namaFile = 'tambah_user.txt'; //$argv[1];
         // baca folder gerkin
         // masukan semua nama file
         // nanti di loop
@@ -79,6 +59,6 @@ class GenerateController extends Controller
         $model = "App\\" . $namaModel;
         $m = new $model;
         $fillable = $m->getFillable();
-        return view("generate", ["dir" => $fillable]);
+        return view("generate", ["dir" => $folderName]);
     }
 }

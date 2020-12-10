@@ -49,7 +49,7 @@
     <?php
 
 
-    // print_r($dir);
+    print_r($dir);
     // foreach ($dir as $d) {
     //     if ("email" == $d) {
     //         print($d);

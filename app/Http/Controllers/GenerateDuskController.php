@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App;
 use Illuminate\Support\Facades\App as FacadesApp;
+use OutOfBoundsException;
 
 class GenerateDuskController extends Controller
 {
@@ -27,7 +28,13 @@ class GenerateDuskController extends Controller
 
                     // cek kesamaan kata dari argumen dan nama file
                     // bisa engga perlu dicek kesamaan, kalau ada langsung baca filenya dan buat -> menghilangkan param namaFile
-                    if (similar_text($file, $namaFile) >= 5) {
+                    // if (similar_text($file, $namaFile) >= 5) {
+                    //     $fileReader = fopen($this->dir . $file, 'r');
+                    //     array_push($header, $fileReader);
+                    //     break;
+                    // }
+
+                    if ($file == $namaFile) {
                         $fileReader = fopen($this->dir . $file, 'r');
                         array_push($header, $fileReader);
                         break;
@@ -116,9 +123,13 @@ class GenerateDuskController extends Controller
                         for ($j = 0; $j < sizeof($words); $j++) {
                             if ($words[$j] == $keys[5]) { // halaman
                                 $this->write('$browser->visit(' . "'/" . $words[$j + 1] . "') \n \t");
-                            } else if ($words[$j] == $keys[9] && $words[$j + 1] == $keys[10]) { // login & menggunakan
-                                $this->write('$browser->loginAs(' . "'" . $words[$j + 3] . "') \n \t");
-                                break;
+                            } else if ($words[$j] == $keys[9]) { //login
+                                if (isset($words[$j + 1])) {
+                                    if ($words[$j + 1] == $keys[10]) { //menggunakan
+                                        $this->write('$browser->loginAs(' . "'" . $words[sizeof($words) - 1] . "') \n \t");
+                                        break;
+                                    }
+                                }
                             }
                         }
                     } else if ($words[$i] == $keys[2] || $words[$i] == $keys[3]) { // When & And
@@ -146,6 +157,8 @@ class GenerateDuskController extends Controller
                                 $this->write("->keys('#" . $words[$j + 1] . "','" . $words[$j + 3] . "')\n \t");
                             } else if ($words[$j] == $keys[12]) {
                                 $this->write("->select('" . $words[$j + 1] . "','" . $words[$j + 2] . "')\n \t");
+                            } else if ($words[$j] == $keys[14]) {
+                                $this->write("->attach('cover',base_path('public/images/buku/" . $words[sizeof($words) - 1] . ".png'))\n \t");
                             }
                         }
                     } else if ($words[$i] == $keys[4]) { //Then
@@ -156,8 +169,8 @@ class GenerateDuskController extends Controller
                                 $this->write("->assertPathIs('/login'); \n \t}); \n} \n \n");
                             } else if ($words[$j] == $keys[13]) { //atribut
                                 $this->write("});\n \t");
-                                $this->write('$this'."->assertDatabaseHas('".$words[sizeof($words)-1]."',[ \n \t");
-                                $this->write("'".$words[$j+1]."' => "."'".$words[$j+2]."'\n\t");
+                                $this->write('$this' . "->assertDatabaseHas('" . $words[sizeof($words) - 1] . "',[ \n \t");
+                                $this->write("'" . $words[$j + 1] . "' => " . "'" . $words[$j + 2] . "'\n\t");
                                 $this->write("]);\n \t \n} \n \n");
                             }
                         }
