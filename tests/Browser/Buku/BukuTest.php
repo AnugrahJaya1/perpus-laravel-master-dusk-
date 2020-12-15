@@ -23,8 +23,8 @@ public function testUnit1(){
  	->select('lokasi','rak1')
  	->select('lokasi','rak1')
  	->attach('cover',base_path('public/images/buku/python.png'))
- 	->press('Submit');
- 	});
+ 	->press('Submit')
+ 	;});
  	$this->assertDatabaseHas('buku',[ 
  	'isbn' => '123456789'
 	]);

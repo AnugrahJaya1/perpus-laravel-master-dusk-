@@ -15,65 +15,73 @@ class GenerateDuskController extends Controller
     public function __construct()
     {
         $this->dir = "..\\Gherkin\\";
-        $this->newDir = '..\\..\\..\\tests/Browser\\';
+        $this->newDir = '..\\..\\..\\tests\\Browser\\';
     }
 
-    public function bacaFileHeader($namaFile)
-    {
-        $header = [];
-        if (is_dir($this->dir)) {
-            if ($dh = opendir($this->dir)) {
-                while (($file = readdir($dh)) !== false) {
-                    $str = "filename: $file : filetype: " . filetype($this->dir . $file) . "\n";
+    // public function bacaFileHeader($namaFile)
+    // {
+    //     $header = [];
+    //     if (is_dir($this->dir)) {
+    //         if ($dh = opendir($this->dir)) {
+    //             while (($file = readdir($dh)) !== false) {
+    //                 $str = "filename: $file : filetype: " . filetype($this->dir . $file) . "\n";
 
-                    // cek kesamaan kata dari argumen dan nama file
-                    // bisa engga perlu dicek kesamaan, kalau ada langsung baca filenya dan buat -> menghilangkan param namaFile
-                    // if (similar_text($file, $namaFile) >= 5) {
-                    //     $fileReader = fopen($this->dir . $file, 'r');
-                    //     array_push($header, $fileReader);
-                    //     break;
-                    // }
+    //                 // cek kesamaan kata dari argumen dan nama file
+    //                 // bisa engga perlu dicek kesamaan, kalau ada langsung baca filenya dan buat -> menghilangkan param namaFile
+    //                 // if (similar_text($file, $namaFile) >= 5) {
+    //                 //     $fileReader = fopen($this->dir . $file, 'r');
+    //                 //     array_push($header, $fileReader);
+    //                 //     break;
+    //                 // }
 
-                    if ($file == $namaFile) {
-                        $fileReader = fopen($this->dir . $file, 'r');
-                        array_push($header, $fileReader);
-                        break;
-                    }
-                }
-                closedir($dh);
-            }
-        }
+    //                 if ($file == $namaFile) {
+    //                     $fileReader = fopen($this->dir . $file, 'r');
+    //                     array_push($header, $fileReader);
+    //                     break;
+    //                 }
+    //             }
+    //             closedir($dh);
+    //         }
+    //     }
 
-        $words = preg_split('/\s+/', fgets($fileReader), -1, PREG_SPLIT_NO_EMPTY);
-        $folderName = $words[1];
-        array_push($header, $folderName);
-        $newFileName = $words[2];
-        array_push($header, $newFileName);
-        $namaModel = $words[3];
-        array_push($header, $namaModel);
+    //     $words = preg_split('/\s+/', fgets($fileReader), -1, PREG_SPLIT_NO_EMPTY);
+    //     $folderName = $words[1];
+    //     array_push($header, $folderName);
+    //     $newFileName = $words[2];
+    //     array_push($header, $newFileName);
+    //     $namaModel = $words[3];
+    //     array_push($header, $namaModel);
 
-        return $header;
-    }
+    //     return $header;
+    // }
 
-    public function buatFolder($folderName, $fileName)
-    {
-        $dir = dirname(__DIR__) . $this->newDir . $folderName;
+    // public function buatFolder($folderName, $fileName)
+    // {
+    //     $dir = dirname(__DIR__) . $this->newDir . $folderName;
 
-        if (is_dir($dir) === false) {
-            mkdir($dir);
-        }
+    //     if (is_dir($dir) === false) {
+    //         mkdir($dir);
+    //     }
 
-        $this->fileWriter = fopen($dir . '/' . $fileName . 'Test.php', 'w');
-    }
+    //     $this->fileWriter = fopen($dir . '/' . $fileName . 'Test.php', 'w');
+    // }
 
-    public function getFileWriter()
-    {
-        return $this->fileWriter;
+    // public function getFileWriter()
+    // {
+    //     return $this->fileWriter;
+    // }
+
+    public function setFileWriter($fileWriter){
+        $this->fileWriter = $fileWriter;
     }
 
     private function write($text)
     {
         fwrite($this->fileWriter, $text);
+    }
+
+    public function getNewDir(){
+        return $this->newDir;
     }
 
     public function writeBody($newFileName, $fileReader, $namaModel)
@@ -150,7 +158,7 @@ class GenerateDuskController extends Controller
                             }
 
                             if ($words[$j] == $keys[6]) { //tombol
-                                $this->write("->press('" . $words[$j + 1] . "');\n \t");
+                                $this->write("->press('" . $words[$j + 1] . "')\n \t");
                             } else if ($words[$j] == $keys[11]) { //link
                                 $this->write("->clickLink('" . $words[$j + 1] . " " . $words[$j + 2] . "')\n \t");
                             } else if ($words[$j] == $keys[15]) { //mengisi
@@ -168,7 +176,7 @@ class GenerateDuskController extends Controller
                             } else if ($words[$j] == $keys[8]) { //tulisan
                                 $this->write("->assertPathIs('/login'); \n \t}); \n} \n \n");
                             } else if ($words[$j] == $keys[13]) { //atribut
-                                $this->write("});\n \t");
+                                $this->write(";});\n \t");
                                 $this->write('$this' . "->assertDatabaseHas('" . $words[sizeof($words) - 1] . "',[ \n \t");
                                 $this->write("'" . $words[$j + 1] . "' => " . "'" . $words[$j + 2] . "'\n\t");
                                 $this->write("]);\n \t \n} \n \n");

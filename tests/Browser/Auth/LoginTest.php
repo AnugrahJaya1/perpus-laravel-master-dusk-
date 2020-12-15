@@ -12,7 +12,7 @@ public function testUnit1(){
  	$browser->visit('/login') 
  	->type('email', 'admin123@gilacoding.com') 
  	->type('password', 'admin123') 
- 	->press('Login');
+ 	->press('Login')
  	->assertPathIs('/home'); 
  	}); 
 } 
@@ -22,7 +22,7 @@ public function testUnit2(){
  	$browser->visit('/login') 
  	->type('email', 'user123@gilacoding.com') 
  	->type('password', 'user123') 
- 	->press('Login');
+ 	->press('Login')
  	->assertPathIs('/home'); 
  	}); 
 } 
@@ -32,7 +32,7 @@ public function testUnit3(){
  	$browser->visit('/login') 
  	->type('email', 'admin123@gilacoding.com') 
  	->type('password', 'admin122') 
- 	->press('Login');
+ 	->press('Login')
  	->assertPathIs('/login'); 
  	}); 
 } 
@@ -42,7 +42,7 @@ public function testUnit4(){
  	$browser->visit('/login') 
  	->type('email', 'user123@gilacoding.com') 
  	->type('password', 'user122') 
- 	->press('Login');
+ 	->press('Login')
  	->assertPathIs('/login'); 
  	}); 
 } 

@@ -32,10 +32,10 @@ class ReaderWriterController extends Controller
         return $namaFile;
     }
 
-    public function bacaFileHeader($file)
+    public function bacaFileHeader()
     {
         $header = [];
-        $words = preg_split('/\s+/', fgets($file), -1, PREG_SPLIT_NO_EMPTY);
+        $words = preg_split('/\s+/', fgets($this->fileReader), -1, PREG_SPLIT_NO_EMPTY);
         $folderName = $words[1];
         array_push($header, $folderName);
         $newFileName = $words[2];
@@ -54,5 +54,27 @@ class ReaderWriterController extends Controller
     public function getFileReader()
     {
         return $this->fileReader;
+    }
+
+    public function buatFolder($newDir, $folderName, $fileName)
+    {
+        $dir = dirname(__DIR__) . $newDir . $folderName;
+
+        if (is_dir($dir) === false) {
+            mkdir($dir);
+        }
+
+
+        $this->setFileWriter($dir, $fileName);
+    }
+
+    public function setFileWriter($dir, $fileName)
+    {
+        $this->fileWriter = fopen($dir . '/' . $fileName . 'Test.php', 'w');
+    }
+
+    public function getFileWriter()
+    {
+        return $this->fileWriter;
     }
 }

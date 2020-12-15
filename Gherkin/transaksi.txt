@@ -1,11 +1,10 @@
-Feature: Transaksi
+Feature: Transaksi Transaksi Transaksi
     Bagi pengguna yang ingin meminjam buku
     Fitur transaksi menambah data peminjaman buku oleh user
 
     Scenario: Berhasil tambah transaksi
         Given Pengguna sudah login menggunakan username admin123
-        When Pengguna menekan link Transaksi
-        And Pengguna menekan link Tambah Transaksi
+        When Pengguna menekan link Tambah Transaksi
         And Pengguna menekan tombol Cari buku
         And Pengguna memilih buku Pemrograman Android
         And Pengguna memilih nama Muhammad Dipo

@@ -22,8 +22,8 @@ public function testUnit1(){
  	->select('prodi','TI')
  	->select('user_id','6')
  	->select('user_id','6')
- 	->press('Submit');
- 	});
+ 	->press('Submit')
+ 	;});
  	$this->assertDatabaseHas('anggota',[ 
  	'npm' => '0000001'
 	]);

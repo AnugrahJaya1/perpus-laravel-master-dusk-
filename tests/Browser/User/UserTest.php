@@ -21,8 +21,8 @@ public function testUnit1(){
  	->select('level','user')
  	->select('level','user')
  	->type('password', 'password') 
- 	->press('Register');
- 	});
+ 	->press('Register')
+ 	;});
  	$this->assertDatabaseHas('users',[ 
  	'username' => 'test'
 	]);
