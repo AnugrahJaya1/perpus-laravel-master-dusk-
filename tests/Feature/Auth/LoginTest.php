@@ -15,6 +15,13 @@ class LoginTest extends TestCase
      */
     public function testExample()
     {
-        // $this->visit("/login");
+        $response = $this->post('/login',[
+            'email' => 'admin123@gilacoding.com',
+            'password' => 'admin123',
+        ]);
+
+        $response = $this->get('/home');
+
+        $response->assertStatus(200);
     }
 }

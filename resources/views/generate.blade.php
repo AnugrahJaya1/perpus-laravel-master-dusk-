@@ -30,15 +30,15 @@
     <table>
         <tr>
             <th>Feature</th>
-            <th>Button PHPUnit</th>
             <th>Button Dusk</th>
+            <th>Button PHPUnit</th>
         </tr>
         <tr>
             <td>Login</td>
             <form action="/generate" method="post">
                 {{ csrf_field() }}
-                <td><input type="submit" value="Submit" name="btnIPA" class="btn bg-success"></td>
-                <td></td>
+                <td><input type="submit" value="Submit" name="dusk" class="btn bg-success"></td>
+                <td><input type="submit" value="Submit" name="phpunit" class="btn bg-success"></td>
                 <!-- <td><button>BTN 1</button></td>
                 <td><button>BTN 2</button></td> -->
             </form>

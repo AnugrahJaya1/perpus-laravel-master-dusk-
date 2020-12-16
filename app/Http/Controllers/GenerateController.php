@@ -6,14 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use SebastianBergmann\Environment\Console;
+use Svg\Tag\Rect;
 
 class GenerateController extends Controller
 {
     private $readerWriter;
+    private $input;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->readerWriter = new ReaderWriterController();
+        $this->input = $request->input();
     }
 
     public function  index()
