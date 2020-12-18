@@ -148,7 +148,7 @@ class GenerateDuskController extends Controller
                                         // $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
                                         // $this->write($words[$j+2]);
                                         if ($words[$j - 1] == $keys[12]) {
-                                            $this->write("->select('" . $words[$j] . "','" . $words[$j + 1] . "')\n \t");
+                                            //$this->write("->select('" . $words[$j] . "','" . $words[$j + 1] . "')\n \t");
                                         } else {
                                             $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
                                         }
@@ -163,7 +163,7 @@ class GenerateDuskController extends Controller
                                 $this->write("->clickLink('" . $words[$j + 1] . " " . $words[$j + 2] . "')\n \t");
                             } else if ($words[$j] == $keys[15]) { //mengisi
                                 $this->write("->keys('#" . $words[$j + 1] . "','" . $words[$j + 3] . "')\n \t");
-                            } else if ($words[$j] == $keys[12]) {
+                            } else if ($words[$j] == $keys[12]) { 
                                 $this->write("->select('" . $words[$j + 1] . "','" . $words[$j + 2] . "')\n \t");
                             } else if ($words[$j] == $keys[14]) {
                                 $this->write("->attach('cover',base_path('public/images/buku/" . $words[sizeof($words) - 1] . ".png'))\n \t");

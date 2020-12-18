@@ -19,8 +19,6 @@ public function testUnit1(){
  	->keys('#tanggal_lahir','4271998')
  	->select('jenis_kelamin','Laki-Laki')
  	->select('prodi','TI')
- 	->select('prodi','TI')
- 	->select('user_id','6')
  	->select('user_id','6')
  	->press('Submit')
  	;});

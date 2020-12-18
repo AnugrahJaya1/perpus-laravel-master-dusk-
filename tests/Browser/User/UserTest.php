@@ -19,7 +19,6 @@ public function testUnit1(){
  	->attach('cover',base_path('public/images/buku/kodekiddo.png'))
  	->type('gambar', 'dengan') 
  	->select('level','user')
- 	->select('level','user')
  	->type('password', 'password') 
  	->press('Register')
  	;});
