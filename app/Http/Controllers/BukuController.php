@@ -126,24 +126,27 @@ class BukuController extends Controller
             $cover = NULL;
         }
 
-        Buku::create([
-                'judul' => $request->get('judul'),
-                'isbn' => $request->get('isbn'),
-                'pengarang' => $request->get('pengarang'),
-                'penerbit' => $request->get('penerbit'),
-                'tahun_terbit' => $request->get('tahun_terbit'),
-                'jumlah_buku' => $request->get('jumlah_buku'),
-                'deskripsi' => $request->get('deskripsi'),
-                'lokasi' => $request->get('lokasi'),
-                'cover' => $cover
-            ]);
-
-        alert()->success('Berhasil.','Data telah ditambahkan!');
+        $this->storeMethod($request->all(),$cover);
 
         return redirect()->route('buku.index');
 
     }
+    public function storeMethod($array,$cover){
 
+        Buku::create([
+                'judul' => $array['judul'],
+                'isbn' => $array['isbn'],
+                'pengarang' => $array['pengarang'],
+                'penerbit' => $array['penerbit'],
+                'tahun_terbit' => $array['tahun_terbit'],
+                'jumlah_buku' => $array['jumlah_buku'],
+                'deskripsi' => $array['deskripsi'],
+                'lokasi' => $array['lokasi'],
+                'cover' => $cover
+            ]);
+
+        alert()->success('Berhasil.','Data telah ditambahkan!');
+    }
     /**
      * Display the specified resource.
      *

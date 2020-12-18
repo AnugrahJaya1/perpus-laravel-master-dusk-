@@ -4,10 +4,11 @@ Feature: Transaksi Transaksi Transaksi
 
     Scenario: Berhasil tambah transaksi
         Given Pengguna sudah login menggunakan username admin123
-        When Pengguna menekan link Tambah Transaksi
+        When Pengguna menekan link Transaksi Buku
+        And Pengguna menekan link Tambah Transaksi
         And Pengguna menekan tombol Cari buku
         And Pengguna memilih buku Pemrograman Android
         And Pengguna memilih nama Muhammad Dipo
-        And Pengguna mililih keterangan Pinjam
+        And Pengguna memilih keterangan Pinjam
         And Pengguna menekan tombol Submit
         Then Akan muncul tulisan Berhasil

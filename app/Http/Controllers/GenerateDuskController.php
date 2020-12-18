@@ -161,11 +161,11 @@ class GenerateDuskController extends Controller
                                 $this->write("->press('" . $words[$j + 1] . "')\n \t");
                             } else if ($words[$j] == $keys[11]) { //link
                                 $this->write("->clickLink('" . $words[$j + 1] . " " . $words[$j + 2] . "')\n \t");
-                            } else if ($words[$j] == $keys[15]) { //mengisi
+                            } else if ($words[$j] == $keys[15]) { //memilih
                                 $this->write("->keys('#" . $words[$j + 1] . "','" . $words[$j + 3] . "')\n \t");
-                            } else if ($words[$j] == $keys[12]) { 
+                            } else if ($words[$j] == $keys[12]) { //opsi
                                 $this->write("->select('" . $words[$j + 1] . "','" . $words[$j + 2] . "')\n \t");
-                            } else if ($words[$j] == $keys[14]) {
+                            } else if ($words[$j] == $keys[14]) {//melampirkan
                                 $this->write("->attach('cover',base_path('public/images/buku/" . $words[sizeof($words) - 1] . ".png'))\n \t");
                             }
                         }

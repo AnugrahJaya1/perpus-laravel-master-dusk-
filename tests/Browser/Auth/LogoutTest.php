@@ -9,10 +9,7 @@ class LogoutTest extends DuskTestCase {
  
 public function testUnit1(){
  	$this->browse(function (Browser $browser){
- 	$browser->visit('/login') 
- 	->type('email', 'admin123@gilacoding.com') 
- 	->type('password', 'admin123') 
- 	->press('Login')
+ 	$browser->loginAs('admin123') 
  	->clickLink('Hello, Gilacoding')
  	->clickLink('Sign Out')
  	->assertPathIs('/login'); 
