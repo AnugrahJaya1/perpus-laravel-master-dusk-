@@ -9,7 +9,10 @@ class BukuTest extends DuskTestCase {
  
 public function testUnit1(){
  	$this->browse(function (Browser $browser){
- 	$browser->loginAs('admin123') 
+ 	$browser->visit('/login') 
+ 	->type('email', 'admin123@gilacoding.com') 
+ 	->type('password', 'admin123') 
+ 	->press('Login')
  	->clickLink('Master Data')
  	->clickLink('Data Buku')
  	->clickLink('Tambah Buku')
@@ -21,8 +24,7 @@ public function testUnit1(){
  	->type('jumlah_buku', '5') 
  	->type('deskripsi', 'Buku_untuk_belajar_Bahasa_Pemrograman_Python') 
  	->select('lokasi','rak1')
- 	->select('lokasi','rak1')
- 	->attach('cover',base_path('public/images/buku/python.png'))
+ 	->attach('cover',base_path('public/images/buku/pythonpng'))
  	->press('Submit')
  	;});
  	$this->assertDatabaseHas('buku',[ 

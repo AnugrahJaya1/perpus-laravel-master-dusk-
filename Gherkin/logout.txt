@@ -2,7 +2,9 @@ Feature: Auth Logout User
     Logout pengguna dari akunnya
 
     Scenario: Berhasil logout
-        Given Pengguna sudah login menggunakan username admin123
-        When Pengguna menekan link Hello, Gilacoding
+        Given Pengguna ada di halaman login
+        When Pengguna mengisi email dengan admin123@gilacoding.com
+        And Pengguna mengisi password dengan admin123
+        And Pengguna menekan tombol Login
         And Pengguna menekan link Sign Out
         Then Pengguna berhasil masuk ke halaman login

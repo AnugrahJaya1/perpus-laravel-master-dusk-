@@ -3,8 +3,11 @@ Feature: Buku Buku Buku
     Data buku baru yang bisa dipinjam oleh pengguna
 
     Scenario: Berhasil tambah buku
-    Given Pengguna sudah login menggunakan username admin123
-    When Pengguna menekan link Master Data
+    Given Pengguna ada di halaman login
+    When Pengguna mengisi email dengan admin123@gilacoding.com
+    And Pengguna mengisi password dengan admin123
+    And Pengguna menekan tombol Login
+    And Pengguna menekan link Master Data
     And Pengguna menekan link Data Buku
     And Pengguna menekan link Tambah Buku
     And Pengguna mengisi judul dengan Pemgrograman Python
@@ -15,6 +18,6 @@ Feature: Buku Buku Buku
     And Pengguna mengisi jumlah_buku dengan 5
     And Pengguna mengisi deskripsi dengan Buku_untuk_belajar_Bahasa_Pemrograman_Python
     And Pengguna menekan opsi lokasi rak1 
-    And Pengguna melampirkan gambar buku dengan python
+    And Pengguna melampirkan cover buku dengan python
     And Pengguna menekan tombol Submit
     Then Pengguna dengan atribut isbn 123456789 terdaftar pada tabel buku 
