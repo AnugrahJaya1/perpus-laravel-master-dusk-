@@ -98,7 +98,7 @@ class GenerateController extends Controller
     public function generatePHPUnit()
     {
         $generatePHPUnit = new GeneratePHPUnitController();
-        $namaFile = 'login.txt'; //$argv[1];
+        $namaFile = 'logout.txt'; //$argv[1];
         // baca folder gerkin
         // masukan semua nama file
         // nanti di loop

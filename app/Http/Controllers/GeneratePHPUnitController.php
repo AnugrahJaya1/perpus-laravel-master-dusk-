@@ -45,7 +45,7 @@ class GeneratePHPUnitController extends Controller
         // atribut bantuan
         $keys = [
             "Scenario:", "Given", "When", "And", "Then", "halaman", "Login",
-            "berhasil", "tulisan"
+            "berhasil", "tulisan", "Sign"
         ];
 
 
@@ -58,6 +58,7 @@ class GeneratePHPUnitController extends Controller
 
         $used = [];
         $array = [];
+        $logout = false;
 
         if ($fileReader) {
             while (($line = fgets($fileReader)) !== false) {
@@ -83,7 +84,7 @@ class GeneratePHPUnitController extends Controller
                                     if (in_array($words[$j], $used) == false) {
                                         $key = $words[$j];
                                         $array[$key] = [];
-                                        
+
                                         array_push($used, $words[$j]);
                                         array_push($array[$key], $words[$j + 2]);
                                     }
@@ -95,15 +96,26 @@ class GeneratePHPUnitController extends Controller
                                     $this->write("'" . $key . "'=>'" . $value[0] . "',\n\t");
                                 }
                                 $this->write("]);\n\t");
-                                $this->write('$response = $this->get('."'/home');\n\t");
+                                
+                            }else if($words[$j]==$keys[9]){// Sign -> Signout
+                                $this->write('$response = $this->post('."'/logout');\n\t");
+                                $logout = true;
                             }
                         }
                     } else if ($words[$i] == $keys[4]) { //Then
                         for ($j = 0; $j < sizeof($words); $j++) {
-                            if($words[$j]==$keys[7] || $words[$j]==$keys[8]){// berhasil || tulisan
-                                $this->write('$response->assertStatus(200);'."\n\t} \n\t \n\t");
+                            if ($words[$j] == $keys[7]) { // berhasil
+                                if($logout){
+                                    $this->write('$response->assertRedirect(' . "''" . "); \n\t} \n\t \n\t");
+                                }else{
+                                    $this->write('$response->assertRedirect(' . "'/".$words[sizeof($words)-1]."'" . "); \n\t} \n\t \n\t");
+                                }
+                            } else if ($words[$j] == $keys[8]) { // tulisan
+                                $this->write('$response->assertRedirect(' . "''" . "); \n\t} \n\t \n\t");
                             }
                         }
+                        $array = [];
+                        $used = [];
                     }
                 }
             }

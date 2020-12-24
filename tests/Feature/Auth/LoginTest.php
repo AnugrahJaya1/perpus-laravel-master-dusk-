@@ -12,35 +12,31 @@ public function testUnit1(){
 	'email'=>'admin123@gilacoding.com',
 	'password'=>'admin123',
 	]);
-	$response = $this->get('/home');
-	$response->assertStatus(200);
+	$response->assertRedirect('/home'); 
 	} 
 	 
 	public function testUnit2(){
  	$response = $this->post('/login',[
-	'email'=>'admin123@gilacoding.com',
-	'password'=>'admin123',
+	'email'=>'user123@gilacoding.com',
+	'password'=>'user123',
 	]);
-	$response = $this->get('/home');
-	$response->assertStatus(200);
+	$response->assertRedirect('/home'); 
 	} 
 	 
 	public function testUnit3(){
  	$response = $this->post('/login',[
 	'email'=>'admin123@gilacoding.com',
-	'password'=>'admin123',
+	'password'=>'admin122',
 	]);
-	$response = $this->get('/home');
-	$response->assertStatus(200);
+	$response->assertRedirect(''); 
 	} 
 	 
 	public function testUnit4(){
  	$response = $this->post('/login',[
-	'email'=>'admin123@gilacoding.com',
-	'password'=>'admin123',
+	'email'=>'user123@gilacoding.com',
+	'password'=>'user122',
 	]);
-	$response = $this->get('/home');
-	$response->assertStatus(200);
+	$response->assertRedirect(''); 
 	} 
 	 
 	}
