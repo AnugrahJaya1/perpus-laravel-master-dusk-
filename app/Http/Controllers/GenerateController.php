@@ -19,14 +19,14 @@ class GenerateController extends Controller
         $this->input = $request->input();
     }
 
-    public function  index()
-    {
-        // $model = "App\\" . "User";
-        // $m = new $model;
-        // $fillable = $m->getFillable();
-        // return view("generate");
-        return view('generate', ["dir" => "test"]);
-    }
+    // public function  index()
+    // {
+    //     // $model = "App\\" . "User";
+    //     // $m = new $model;
+    //     // $fillable = $m->getFillable();
+    //     // return view("generate");
+    //     return view('generate', ["dir" => "test"]);
+    // }
 
     public function generateDusk()
     {
@@ -93,5 +93,19 @@ class GenerateController extends Controller
         // $m = new $model;
         // $fillable = $m->getFillable();
         return view("generate", ["dir" => $namaFile]);
+    }
+
+    public function generatePHPUnit(){
+
+    }
+
+    public function mode(Request $request){
+        $btn = $request['btn'];
+        if($btn == 'dusk'){
+            $this->generateDusk();
+        }else{
+            $this->generatePHPUnit();
+        }
+        return view("generate", ["dir" => $request['btn']]);
     }
 }

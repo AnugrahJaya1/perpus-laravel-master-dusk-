@@ -35,12 +35,10 @@
         </tr>
         <tr>
             <td>Login</td>
-            <form action="/generate" method="post">
+            <form action="" method="post">
                 {{ csrf_field() }}
-                <td><input type="submit" value="Submit" name="dusk" class="btn bg-success"></td>
-                <td><input type="submit" value="Submit" name="phpunit" class="btn bg-success"></td>
-                <!-- <td><button>BTN 1</button></td>
-                <td><button>BTN 2</button></td> -->
+                <td><input type="submit" value="dusk" name="btn" class="btn bg-success"></td>
+                <td><input type="submit" value="phpunit" name="btn" class="btn bg-success"></td>
             </form>
 
         </tr>
@@ -49,7 +47,7 @@
     <?php
 
 
-    print_r($dir);
+    print_r(isset($dir) ? $dir : "");
     // foreach ($dir as $d) {
     //     if ("email" == $d) {
     //         print($d);
