@@ -43,7 +43,7 @@ class GenerateController extends Controller
             // get file reader
             $fileReader = $this->readerWriter->getFileReader();
 
-            
+
             // membaca header
             $header = $this->readerWriter->bacaFileHeader();
 
@@ -58,7 +58,7 @@ class GenerateController extends Controller
             $fileWriter = $this->readerWriter->getFileWriter();
             $generateDusk->setFileWriter($fileWriter);
 
-        
+
 
             // bikin body
             $generateDusk->writeBody($newFileName, $fileReader, $namaModel);
@@ -95,15 +95,46 @@ class GenerateController extends Controller
         return view("generate", ["dir" => $namaFile]);
     }
 
-    public function generatePHPUnit(){
+    public function generatePHPUnit()
+    {
+        $generatePHPUnit = new GeneratePHPUnitController();
+        $namaFile = 'login.txt'; //$argv[1];
+        // baca folder gerkin
+        // masukan semua nama file
+        // nanti di loop
+        // set file reader
+        $this->readerWriter->setFileReader($namaFile);
+        // get file reader
+        $fileReader = $this->readerWriter->getFileReader();
 
+
+        // membaca header
+        $header = $this->readerWriter->bacaFileHeader();
+
+        $folderName = $header[0];
+        $newFileName = $header[1];
+        $namaModel = $header[2];
+
+        // buat folder + set file writer di readerWriter
+        $newDir = $generatePHPUnit->getNewDir();
+        $this->readerWriter->buatFolder($newDir, $folderName, $newFileName);
+
+        $fileWriter = $this->readerWriter->getFileWriter();
+        $generatePHPUnit->setFileWriter($fileWriter);
+
+
+
+        // bikin body
+        $generatePHPUnit->writeBody($newFileName, $fileReader, $namaModel, $folderName);
+        return view("generate", ["dir" => $namaFile]);
     }
 
-    public function mode(Request $request){
+    public function mode(Request $request)
+    {
         $btn = $request['btn'];
-        if($btn == 'dusk'){
+        if ($btn == 'dusk') {
             $this->generateDusk();
-        }else{
+        } else {
             $this->generatePHPUnit();
         }
         return view("generate", ["dir" => $request['btn']]);

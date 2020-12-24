@@ -44,8 +44,8 @@ class GeneratePHPUnitController extends Controller
 
         // atribut bantuan
         $keys = [
-            "Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", "login", "menggunakan", "link",
-            "opsi", "atribut", "melampirkan", "memilih"
+            "Scenario:", "Given", "When", "And", "Then", "halaman", "Login",
+            "berhasil", "tulisan"
         ];
 
 
@@ -57,6 +57,7 @@ class GeneratePHPUnitController extends Controller
         $status = "";
 
         $used = [];
+        $array = [];
 
         if ($fileReader) {
             while (($line = fgets($fileReader)) !== false) {
@@ -68,6 +69,7 @@ class GeneratePHPUnitController extends Controller
 
                     if ($words[$i] == $keys[0]) { // Scenario:
                         $this->write("public function testUnit" . $banyakTest . "(){\n \t");
+                        $banyakTest++;
                     } else if ($words[$i] == $keys[1]) { // Given
                         for ($j = 0; $j < sizeof($words); $j++) {
                             if ($words[$j] == $keys[5]) { //halaman
@@ -79,14 +81,29 @@ class GeneratePHPUnitController extends Controller
                             foreach ($fillable as $atr) {
                                 if ($words[$j] == $atr) {
                                     if (in_array($words[$j], $used) == false) {
-                                        $this->write("'".$words[$j]."'=>'".$words[$j+1]."',\n\t");
+                                        $key = $words[$j];
+                                        $array[$key] = [];
+                                        
+                                        array_push($used, $words[$j]);
+                                        array_push($array[$key], $words[$j + 2]);
                                     }
-                                    array_push($used, $words[$j]);
                                 }
+                            }
+                            if ($words[$j] == $keys[6]) { //login
+                                // $this->write("\n\t");
+                                foreach ($array as $key => $value) {
+                                    $this->write("'" . $key . "'=>'" . $value[0] . "',\n\t");
+                                }
+                                $this->write("]);\n\t");
+                                $this->write('$response = $this->get('."'/home');\n\t");
                             }
                         }
                     } else if ($words[$i] == $keys[4]) { //Then
-
+                        for ($j = 0; $j < sizeof($words); $j++) {
+                            if($words[$j]==$keys[7] || $words[$j]==$keys[8]){// berhasil || tulisan
+                                $this->write('$response->assertStatus(200);'."\n\t} \n\t \n\t");
+                            }
+                        }
                     }
                 }
             }
