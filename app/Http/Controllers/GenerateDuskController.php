@@ -211,6 +211,15 @@ class GenerateDuskController extends Controller
                         for ($j = 0; $j < sizeof($words); $j++) {
                             if ($words[$j] == $keys[7]) { //berhasil
                                 $this->write("->assertPathIs('/" . $words[sizeof($words) - 1] . "'); \n \t}); \n} \n \n");
+                            } else if ($words[$j] == $keys[8]) { //tulisan
+                                $msg="";
+                                for($k = $j+1; $k<sizeof($words);$k++){
+                                    $msg.=$words[$k];
+                                    if($k!=sizeof($words)-1){
+                                        $msg.=" ";
+                                    }
+                                }
+                                $this->write("->assertSee(".$msg."); \n \t}); \n} \n \n");
                             } else if ($words[$j] == $keys[25]) { //kembali
                                 $this->write("->assertPathIs('/".$words[sizeof($words)-1]."'); \n \t}); \n} \n \n");
                             } else if ($words[$j] == $keys[13]) { //atribut
