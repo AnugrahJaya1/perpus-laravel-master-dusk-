@@ -45,7 +45,7 @@ class GeneratePHPUnitController extends Controller
         // atribut bantuan
         $keys = [
             "Scenario:", "Given", "When", "And", "Then", "halaman", "Login",
-            "berhasil", "tulisan", "Sign"
+            "berhasil", "tulisan", "Sign", "kembali"
         ];
 
 
@@ -96,21 +96,20 @@ class GeneratePHPUnitController extends Controller
                                     $this->write("'" . $key . "'=>'" . $value[0] . "',\n\t");
                                 }
                                 $this->write("]);\n\t");
-                                
-                            }else if($words[$j]==$keys[9]){// Sign -> Signout
-                                $this->write('$response = $this->post('."'/logout');\n\t");
+                            } else if ($words[$j] == $keys[9]) { // Sign -> Signout
+                                $this->write('$response = $this->post(' . "'/logout');\n\t");
                                 $logout = true;
                             }
                         }
                     } else if ($words[$i] == $keys[4]) { //Then
                         for ($j = 0; $j < sizeof($words); $j++) {
                             if ($words[$j] == $keys[7]) { // berhasil
-                                if($logout){
+                                if ($logout) {
                                     $this->write('$response->assertRedirect(' . "''" . "); \n\t} \n\t \n\t");
-                                }else{
-                                    $this->write('$response->assertRedirect(' . "'/".$words[sizeof($words)-1]."'" . "); \n\t} \n\t \n\t");
+                                } else {
+                                    $this->write('$response->assertRedirect(' . "'/" . $words[sizeof($words) - 1] . "'" . "); \n\t} \n\t \n\t");
                                 }
-                            } else if ($words[$j] == $keys[8]) { // tulisan
+                            } else if ($words[$j] == $keys[10]) { // kembali
                                 $this->write('$response->assertRedirect(' . "''" . "); \n\t} \n\t \n\t");
                             }
                         }

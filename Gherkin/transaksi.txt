@@ -14,4 +14,4 @@ Feature: Transaksi Transaksi Transaksi
         And Pengguna klik nama anggota Muhammad Dipo
         And Pengguna mengisi keterangan Pinjam
         And Pengguna menekan tombol Submit
-        Then Akan muncul tulisan Berhasil
+        Then Akan muncul tulisan "Berhasil"

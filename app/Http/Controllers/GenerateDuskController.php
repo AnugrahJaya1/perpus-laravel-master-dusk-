@@ -103,7 +103,7 @@ class GenerateDuskController extends Controller
         $keys = [
             "Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", "login", "menggunakan", "link",
             "opsi", "atribut", "melampirkan", "memilih", "email", "password", "password_confirmation", "User", "sudah login", "jenis_kelamin", "menunggu",
-            "klik", "keterangan"
+            "klik", "keterangan", "kembali"
         ];
 
 
@@ -211,8 +211,8 @@ class GenerateDuskController extends Controller
                         for ($j = 0; $j < sizeof($words); $j++) {
                             if ($words[$j] == $keys[7]) { //berhasil
                                 $this->write("->assertPathIs('/" . $words[sizeof($words) - 1] . "'); \n \t}); \n} \n \n");
-                            } else if ($words[$j] == $keys[8]) { //tulisan
-                                $this->write("->assertPathIs('/login'); \n \t}); \n} \n \n");
+                            } else if ($words[$j] == $keys[25]) { //kembali
+                                $this->write("->assertPathIs('/".$words[sizeof($words)-1]."'); \n \t}); \n} \n \n");
                             } else if ($words[$j] == $keys[13]) { //atribut
                                 $this->write(";});\n \t");
                                 $this->write('$this' . "->assertDatabaseHas('" . $words[sizeof($words) - 1] . "',[ \n \t");

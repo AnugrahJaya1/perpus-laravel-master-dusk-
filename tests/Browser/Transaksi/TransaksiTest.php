@@ -20,8 +20,4 @@ public function testUnit1(){
  	->click("tr[data-anggota_nama='Muhammad Dipo']")
 	->type('keterangan', 'Pinjam') 
  	->press('Submit')
- 	->assertPathIs('/login'); 
- 	}); 
-} 
- 
-}
+ 	}

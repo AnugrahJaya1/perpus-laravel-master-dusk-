@@ -21,11 +21,11 @@ Feature: Auth Login User
         When Pengguna mengisi email dengan admin123@gilacoding.com
         And Pengguna mengisi password dengan admin122
         And Pengguna menekan tombol Login
-        Then Akan muncul tulisan "These credentials do not match our records."
+        Then kembali ke halaman login
 
     Scenario: Login gagal user
         Given Pengguna ada di halaman login
         When Pengguna mengisi email dengan user123@gilacoding.com
         And Pengguna mengisi password dengan user122
         And Pengguna menekan tombol Login
-        Then Akan muncul tulisan "These credentials do not match our records." 
+        Then kembali ke halaman login
