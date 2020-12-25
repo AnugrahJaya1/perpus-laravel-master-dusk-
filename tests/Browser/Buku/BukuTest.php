@@ -24,7 +24,7 @@ public function testUnit1(){
  	->type('jumlah_buku', '5') 
  	->type('deskripsi', 'Buku_untuk_belajar_Bahasa_Pemrograman_Python') 
  	->select('lokasi','rak1')
- 	->attach('cover',base_path('public/images/buku/pythonpng'))
+ 	->attach('cover',base_path('public/images/buku/python.png'))
  	->press('Submit')
  	;});
  	$this->assertDatabaseHas('buku',[ 

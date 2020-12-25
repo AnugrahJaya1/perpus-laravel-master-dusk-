@@ -19,7 +19,7 @@ public function testUnit1(){
  	->type('name', 'Test') 
  	->type('username', 'test') 
  	->type('email', 'test@gmail.com') 
- 	->attach('gambar',base_path('public/images/user/kodekiddopng'))
+ 	->attach('gambar',base_path('public/images/user/kodekiddo.png'))
  	->select('level','user')
  	->type('password', 'password1') 
  	->type('password_confirmation', 'password1') 

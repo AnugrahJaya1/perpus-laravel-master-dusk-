@@ -154,7 +154,7 @@ class GenerateDuskController extends Controller
                                         if ($words[$j - 1] == $keys[12]) { //opsi
                                             $this->write("->select('" . $words[$j] . "','" . $words[sizeof($words)-1] . "')\n \t");
                                         } else if ($words[$j - 1] == $keys[14]) { //melampirkan
-                                            $this->write("->attach('" . $words[$j] . "',base_path('public/images/" . strtolower($namaModel) . "/" . $words[sizeof($words) - 1] . "png'))\n \t");
+                                            $this->write("->attach('" . $words[$j] . "',base_path('public/images/" . strtolower($namaModel) . "/" . $words[sizeof($words) - 1] . ".png'))\n \t");
                                         } else {
                                             $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
                                         }
