@@ -12,6 +12,8 @@ public function testUnit1(){
  	$browser->visit('/login') 
  	->type('email', 'admin123@gilacoding.com') 
  	->type('password', 'admin123') 
+ 	->press('Login')
+ 	->clickLink('Transaksi Buku')
  	->clickLink('Tambah Transaksi')
  	->press('Cari Buku')
  	->waitForText('Cari Buku')
