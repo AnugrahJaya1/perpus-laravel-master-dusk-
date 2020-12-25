@@ -46,6 +46,10 @@
 
     <?php
 
+    // use App\Anggota;
+
+    // $model = new Anggota();
+    // $dir = $model->getFillable();
 
     print_r(isset($dir) ? $dir : "");
     // foreach ($dir as $d) {

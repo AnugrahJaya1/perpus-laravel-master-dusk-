@@ -83,19 +83,32 @@ class UserController extends Controller
             $gambar = $fileName;
         }
 
-        User::create([
-            'name' => $request->input('name'),
-            'username' => $request->input('username'),
-            'email' => $request->input('email'),
-            'level' => $request->input('level'),
-            'password' => bcrypt(($request->input('password'))),
-            'gambar' => $gambar
-        ]);
+        // User::create([
+        //     'name' => $request->input('name'),
+        //     'username' => $request->input('username'),
+        //     'email' => $request->input('email'),
+        //     'level' => $request->input('level'),
+        //     'password' => bcrypt(($request->input('password'))),
+        //     'gambar' => $gambar
+        // ]);
+        $array = $request->all();
+        $this->storeFunction($array, $gambar);
 
         Session::flash('message', 'Berhasil ditambahkan!');
         Session::flash('message_type', 'success');
         return redirect()->route('user.index');
 
+    }
+
+    public function storeFunction($arr, $gambar){
+        User::create([
+            'name' => $arr['name'],
+            'username' => $arr['username'],
+            'email' => $arr['email'],
+            'level' => $arr['level'],
+            'password' => bcrypt(($arr['password'])),
+            'gambar' => $gambar
+        ]);
     }
 
     /**

@@ -14,7 +14,7 @@ Feature: User User User
     And Pengguna mengisi username dengan test
     And Pengguna mengisi email dengan test@gmail.com
     And Pengguna melampirkan gambar user dengan kodekiddo
-    And Pengguna menekan opsi level user
+    And Pengguna menekan opsi level dengan user
     And Pengguna mengisi password dengan password1
     And Pengguna mengisi password_confirmation dengan password1
     And Pengguna menekan tombol Register

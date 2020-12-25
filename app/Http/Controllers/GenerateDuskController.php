@@ -103,7 +103,7 @@ class GenerateDuskController extends Controller
         $keys = [
             "Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", "login", "menggunakan", "link",
             "opsi", "atribut", "melampirkan", "memilih", "email", "password", "password_confirmation", "User", "sudah login", "jenis_kelamin", "menunggu",
-            "klik", "keterangan", "kembali"
+            "klik", "keterangan", "tetap"
         ];
 
 
@@ -152,7 +152,7 @@ class GenerateDuskController extends Controller
                                         // $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
                                         // $this->write($words[$j+2]);
                                         if ($words[$j - 1] == $keys[12]) { //opsi
-                                            $this->write("->select('" . $words[$j] . "','" . $words[$j + 1] . "')\n \t");
+                                            $this->write("->select('" . $words[$j] . "','" . $words[sizeof($words)-1] . "')\n \t");
                                         } else if ($words[$j - 1] == $keys[14]) { //melampirkan
                                             $this->write("->attach('" . $words[$j] . "',base_path('public/images/" . strtolower($namaModel) . "/" . $words[sizeof($words) - 1] . "png'))\n \t");
                                         } else {

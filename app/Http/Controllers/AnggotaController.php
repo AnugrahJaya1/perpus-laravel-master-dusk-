@@ -77,11 +77,16 @@ class AnggotaController extends Controller
             'npm' => 'required|string|max:20|unique:anggota'
         ]);
 
-        Anggota::create($request->all());
+        // Anggota::create($request->all());
+        $this->storeFunction($request->all());
 
         alert()->success('Berhasil.','Data telah ditambahkan!');
         return redirect()->route('anggota.index');
 
+    }
+
+    public function storeFunction($array){
+        Anggota::create($array);
     }
 
     /**
