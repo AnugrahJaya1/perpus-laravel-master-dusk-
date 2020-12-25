@@ -20,7 +20,6 @@ public function testUnit1(){
  	->type('npm', '0000001') 
  	->type('tempat_lahir', 'Bandung') 
  	->keys('#tgl_lahir','04271998')
- 	->type('tgl_lahir', '04271998') 
  	->select('jenis_kelamin','Laki-Laki')
  	->select('prodi','TI')
  	->select('user_id','6')

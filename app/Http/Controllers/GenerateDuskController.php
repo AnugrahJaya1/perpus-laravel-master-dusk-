@@ -101,9 +101,9 @@ class GenerateDuskController extends Controller
 
         // atribut bantuan
         $keys = [
-            "Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", "login", "menggunakan", "link",
-            "opsi", "atribut", "melampirkan", "memilih", "email", "password", "password_confirmation", "User", "sudah login", "jenis_kelamin", "menunggu",
-            "klik", "keterangan", "tetap"
+            "Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", "login", "menggunakan", //10
+            "link", "opsi", "atribut", "melampirkan", "memilih", "email", "password", "password_confirmation", "User", "sudah login", //20
+            "jenis_kelamin", "menunggu", "klik", "keterangan", "tetap", "tgl_lahir"
         ];
 
 
@@ -152,9 +152,11 @@ class GenerateDuskController extends Controller
                                         // $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
                                         // $this->write($words[$j+2]);
                                         if ($words[$j - 1] == $keys[12]) { //opsi
-                                            $this->write("->select('" . $words[$j] . "','" . $words[sizeof($words)-1] . "')\n \t");
+                                            $this->write("->select('" . $words[$j] . "','" . $words[sizeof($words) - 1] . "')\n \t");
                                         } else if ($words[$j - 1] == $keys[14]) { //melampirkan
                                             $this->write("->attach('" . $words[$j] . "',base_path('public/images/" . strtolower($namaModel) . "/" . $words[sizeof($words) - 1] . ".png'))\n \t");
+                                        } else if ($words[$j] == $keys[26]) {
+                                            $this->write("->keys('#" . $words[$j] . "','" . $words[$j + 2] . "')\n \t");
                                         } else {
                                             $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
                                         }
@@ -189,9 +191,11 @@ class GenerateDuskController extends Controller
                                 }
                             } else if ($words[$j] == $keys[11]) { //link
                                 $this->write("->clickLink('" . $words[$j + 1] . " " . $words[$j + 2] . "')\n \t");
-                            } else if ($words[$j] == $keys[15]) { //mengisi
-                                $this->write("->keys('#" . $words[$j + 1] . "','" . $words[$j + 3] . "')\n \t");
-                            } else if ($words[$j] == $keys[12]) { //opsi
+                            }
+                            // else if ($words[$j] == $keys[15]) { //mengisi
+                            //     $this->write("->keys('#" . $words[$j + 1] . "','" . $words[$j + 3] . "')\n \t");
+                            // } 
+                            else if ($words[$j] == $keys[12]) { //opsi
                                 // $this->write("->select('" . $words[$j + 1] . "','" . $words[$j + 2] . "')\n \t");
                             } else if ($words[$j] == $keys[14]) { //melampirkan
                                 // $this->write("->attach('" . $words[$j + 1] . "',base_path('public/images/" . strtolower($namaModel) . "/" . $words[sizeof($words) - 1] . "png'))\n \t");
@@ -202,8 +206,8 @@ class GenerateDuskController extends Controller
                             } else if ($words[$j] == $keys[22]) { //menunggu
                                 $this->write("->waitForText('" . $words[$j + 3] . " " . $words[$j + 4] . "')\n \t");
                             } else if ($words[$j] == $keys[23]) { //klik
-                                $this->write('->click("tr[data-' . $words[$j + 2] . '_' . $words[$j + 1] . "='".$words[$j+3]." ".$words[$j+4]."']".'")'."\n\t");
-                            }else if($words[$j] == $keys[24]){ //keterangan
+                                $this->write('->click("tr[data-' . $words[$j + 2] . '_' . $words[$j + 1] . "='" . $words[$j + 3] . " " . $words[$j + 4] . "']" . '")' . "\n\t");
+                            } else if ($words[$j] == $keys[24]) { //keterangan
                                 $this->write("->type('" . $words[$j] . "', '" . $words[$j + 1] . "') \n \t");
                             }
                         }
@@ -212,16 +216,16 @@ class GenerateDuskController extends Controller
                             if ($words[$j] == $keys[7]) { //berhasil
                                 $this->write("->assertPathIs('/" . $words[sizeof($words) - 1] . "'); \n \t}); \n} \n \n");
                             } else if ($words[$j] == $keys[8]) { //tulisan
-                                $msg="";
-                                for($k = $j+1; $k<sizeof($words);$k++){
-                                    $msg.=$words[$k];
-                                    if($k!=sizeof($words)-1){
-                                        $msg.=" ";
+                                $msg = "";
+                                for ($k = $j + 1; $k < sizeof($words); $k++) {
+                                    $msg .= $words[$k];
+                                    if ($k != sizeof($words) - 1) {
+                                        $msg .= " ";
                                     }
                                 }
-                                $this->write("->assertSee(".$msg."); \n \t}); \n} \n \n");
+                                $this->write("->assertSee(" . $msg . "); \n \t}); \n} \n \n");
                             } else if ($words[$j] == $keys[25]) { //kembali
-                                $this->write("->assertPathIs('/".$words[sizeof($words)-1]."'); \n \t}); \n} \n \n");
+                                $this->write("->assertPathIs('/" . $words[sizeof($words) - 1] . "'); \n \t}); \n} \n \n");
                             } else if ($words[$j] == $keys[13]) { //atribut
                                 $this->write(";});\n \t");
                                 $this->write('$this' . "->assertDatabaseHas('" . $words[sizeof($words) - 1] . "',[ \n \t");
