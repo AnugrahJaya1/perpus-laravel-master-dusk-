@@ -16,7 +16,7 @@ public function testUnit1(){
  	->clickLink('Master Data')
  	->clickLink('Data Buku')
  	->clickLink('Tambah Buku')
- 	->type('judul', 'Pemgrograman') 
+ 	->type('judul', 'Pemgrograman_Python') 
  	->type('isbn', '123456789') 
  	->type('pengarang', 'Muhammad_Dipo') 
  	->type('penerbit', 'PT_Muhammad_Dipo') 

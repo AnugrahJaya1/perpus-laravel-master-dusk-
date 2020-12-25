@@ -126,22 +126,38 @@ class BukuController extends Controller
             $cover = NULL;
         }
 
-        Buku::create([
-                'judul' => $request->get('judul'),
-                'isbn' => $request->get('isbn'),
-                'pengarang' => $request->get('pengarang'),
-                'penerbit' => $request->get('penerbit'),
-                'tahun_terbit' => $request->get('tahun_terbit'),
-                'jumlah_buku' => $request->get('jumlah_buku'),
-                'deskripsi' => $request->get('deskripsi'),
-                'lokasi' => $request->get('lokasi'),
-                'cover' => $cover
-            ]);
+        // Buku::create([
+        //         'judul' => $request->get('judul'),
+        //         'isbn' => $request->get('isbn'),
+        //         'pengarang' => $request->get('pengarang'),
+        //         'penerbit' => $request->get('penerbit'),
+        //         'tahun_terbit' => $request->get('tahun_terbit'),
+        //         'jumlah_buku' => $request->get('jumlah_buku'),
+        //         'deskripsi' => $request->get('deskripsi'),
+        //         'lokasi' => $request->get('lokasi'),
+        //         'cover' => $cover
+        //     ]);
+
+        $this->storeFunction($request,$cover);
 
         alert()->success('Berhasil.','Data telah ditambahkan!');
 
         return redirect()->route('buku.index');
 
+    }
+
+    public function storeFunction($array, $cover=NULL){
+        Buku::create([
+            'judul' => $array['judul'],
+            'isbn' => $array['isbn'],
+            'pengarang' => $array['pengarang'],
+            'penerbit' => $array['penerbit'],
+            'tahun_terbit' => $array['tahun_terbit'],
+            'jumlah_buku' => $array['jumlah_buku'],
+            'deskripsi' => $array['deskripsi'],
+            'lokasi' => $array['lokasi'],
+            'cover' => $cover
+        ]);
     }
 
     /**
