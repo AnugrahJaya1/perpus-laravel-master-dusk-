@@ -9,6 +9,8 @@ Feature: Transaksi Transaksi Transaksi
         And Pengguna menekan tombol Login
         And Pengguna menekan link Transaksi Buku
         And Pengguna menekan link Tambah Transaksi
+        And Pengguna memilih tgl_pinjam dengan 01012021
+        And Pengguna memilih tgl_kembali dengan 01052021
         And Pengguna menekan tombol Cari Buku
         And Pengguna menunggu muncul kata Cari Buku
         And Pengguna klik judul buku Pemrograman Android

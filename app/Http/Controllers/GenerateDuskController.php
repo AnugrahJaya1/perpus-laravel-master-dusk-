@@ -103,7 +103,7 @@ class GenerateDuskController extends Controller
         $keys = [
             "Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", "login", "menggunakan", //10
             "link", "opsi", "atribut", "melampirkan", "memilih", "email", "password", "password_confirmation", "User", "sudah login", //20
-            "jenis_kelamin", "menunggu", "klik", "keterangan", "tetap", "tgl_lahir"
+            "jenis_kelamin", "menunggu", "klik", "keterangan", "tetap", "tgl"
         ];
 
 
@@ -155,7 +155,7 @@ class GenerateDuskController extends Controller
                                             $this->write("->select('" . $words[$j] . "','" . $words[sizeof($words) - 1] . "')\n \t");
                                         } else if ($words[$j - 1] == $keys[14]) { //melampirkan
                                             $this->write("->attach('" . $words[$j] . "',base_path('public/images/" . strtolower($namaModel) . "/" . $words[sizeof($words) - 1] . ".png'))\n \t");
-                                        } else if ($words[$j] == $keys[26]) {
+                                        } else if (str_contains($words[$j], $keys[26]) ) { //kalau ada tgl
                                             $this->write("->keys('#" . $words[$j] . "','" . $words[$j + 2] . "')\n \t");
                                         } else {
                                             $this->write("->type('" . $words[$j] . "', '" . $words[$j + 2] . "') \n \t");
