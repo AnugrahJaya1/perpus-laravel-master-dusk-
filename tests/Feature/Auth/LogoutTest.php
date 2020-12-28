@@ -5,6 +5,10 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
  
+use App\User;
+ 
+use App\Http\Controllers\UserController;
+ 
 class LogoutTest extends TestCase { 
  
 public function testUnit1(){

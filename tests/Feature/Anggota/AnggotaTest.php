@@ -23,7 +23,7 @@ public function testUnit1(){
 	'tempat_lahir'=>'Bandung',
 	'tgl_lahir'=>'1998-04-27',
 	'prodi'=>'TI',
-	'user_id'=>'6',
+	'user_id'=>'3',
 	];
 	$controller = new AnggotaController();
 	if($count==0){

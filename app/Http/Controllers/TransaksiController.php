@@ -29,10 +29,9 @@ class TransaksiController extends Controller
 
     public function index()
     {
-        if(Auth::user()->level == 'user')
-        {
+        if (Auth::user()->level == 'user') {
             $datas = Transaksi::where('anggota_id', Auth::user()->anggota->id)
-                                ->get();
+                ->get();
         } else {
             $datas = Transaksi::get();
         }
@@ -46,25 +45,25 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        
+
         $getRow = Transaksi::orderBy('id', 'DESC')->get();
         $rowCount = $getRow->count();
-        
+
         $lastId = $getRow->first();
 
         $kode = "TR00001";
-        
+
         if ($rowCount > 0) {
             if ($lastId->id < 9) {
-                    $kode = "TR0000".''.($lastId->id + 1);
+                $kode = "TR0000" . '' . ($lastId->id + 1);
             } else if ($lastId->id < 99) {
-                    $kode = "TR000".''.($lastId->id + 1);
+                $kode = "TR000" . '' . ($lastId->id + 1);
             } else if ($lastId->id < 999) {
-                    $kode = "TR00".''.($lastId->id + 1);
+                $kode = "TR00" . '' . ($lastId->id + 1);
             } else if ($lastId->id < 9999) {
-                    $kode = "TR0".''.($lastId->id + 1);
+                $kode = "TR0" . '' . ($lastId->id + 1);
             } else {
-                    $kode = "TR".''.($lastId->id + 1);
+                $kode = "TR" . '' . ($lastId->id + 1);
             }
         }
 
@@ -90,24 +89,43 @@ class TransaksiController extends Controller
 
         ]);
 
+        // $transaksi = Transaksi::create([
+        //         'kode_transaksi' => $request->get('kode_transaksi'),
+        //         'tgl_pinjam' => $request->get('tgl_pinjam'),
+        //         'tgl_kembali' => $request->get('tgl_kembali'),
+        //         'buku_id' => $request->get('buku_id'),
+        //         'anggota_id' => $request->get('anggota_id'),
+        //         'ket' => $request->get('ket'),
+        //         'status' => 'pinjam'
+        //     ]);
+
+        // $transaksi->buku->where('id', $transaksi->buku_id)
+        //                 ->update([
+        //                     'jumlah_buku' => ($transaksi->buku->jumlah_buku - 1),
+        //                     ]);
+
+        $this->storeFunction($request);
+
+        alert()->success('Berhasil.', 'Data telah ditambahkan!');
+        return redirect()->route('transaksi.index');
+    }
+
+    public function storeFunction($array)
+    {
         $transaksi = Transaksi::create([
-                'kode_transaksi' => $request->get('kode_transaksi'),
-                'tgl_pinjam' => $request->get('tgl_pinjam'),
-                'tgl_kembali' => $request->get('tgl_kembali'),
-                'buku_id' => $request->get('buku_id'),
-                'anggota_id' => $request->get('anggota_id'),
-                'ket' => $request->get('ket'),
-                'status' => 'pinjam'
-            ]);
+            'kode_transaksi' => $array['kode_transaksi'],
+            'tgl_pinjam' => $array['tgl_pinjam'],
+            'tgl_kembali' => $array['tgl_kembali'],
+            'buku_id' => $array['buku_id'],
+            'anggota_id' => $array['anggota_id'],
+            'ket' => $array['ket'],
+            'status' => 'pinjam'
+        ]);
 
         $transaksi->buku->where('id', $transaksi->buku_id)
-                        ->update([
-                            'jumlah_buku' => ($transaksi->buku->jumlah_buku - 1),
-                            ]);
-
-        alert()->success('Berhasil.','Data telah ditambahkan!');
-        return redirect()->route('transaksi.index');
-
+            ->update([
+                'jumlah_buku' => ($transaksi->buku->jumlah_buku - 1),
+            ]);
     }
 
     /**
@@ -122,9 +140,9 @@ class TransaksiController extends Controller
         $data = Transaksi::findOrFail($id);
 
 
-        if((Auth::user()->level == 'user') && (Auth::user()->anggota->id != $data->anggota_id)) {
-                Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
-                return redirect()->to('/');
+        if ((Auth::user()->level == 'user') && (Auth::user()->anggota->id != $data->anggota_id)) {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
+            return redirect()->to('/');
         }
 
 
@@ -138,12 +156,12 @@ class TransaksiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         $data = Transaksi::findOrFail($id);
 
-        if((Auth::user()->level == 'user') && (Auth::user()->anggota->id != $data->anggota_id)) {
-                Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
-                return redirect()->to('/');
+        if ((Auth::user()->level == 'user') && (Auth::user()->anggota->id != $data->anggota_id)) {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
+            return redirect()->to('/');
         }
 
         return view('buku.edit', compact('data'));
@@ -161,15 +179,15 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::find($id);
 
         $transaksi->update([
-                'status' => 'kembali'
-                ]);
+            'status' => 'kembali'
+        ]);
 
         $transaksi->buku->where('id', $transaksi->buku->id)
-                        ->update([
-                            'jumlah_buku' => ($transaksi->buku->jumlah_buku + 1),
-                            ]);
+            ->update([
+                'jumlah_buku' => ($transaksi->buku->jumlah_buku + 1),
+            ]);
 
-        alert()->success('Berhasil.','Data telah diubah!');
+        alert()->success('Berhasil.', 'Data telah diubah!');
         return redirect()->route('transaksi.index');
     }
 
@@ -182,7 +200,7 @@ class TransaksiController extends Controller
     public function destroy($id)
     {
         Transaksi::find($id)->delete();
-        alert()->success('Berhasil.','Data telah dihapus!');
+        alert()->success('Berhasil.', 'Data telah dihapus!');
         return redirect()->route('transaksi.index');
     }
 }

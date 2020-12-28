@@ -22,7 +22,7 @@ public function testUnit1(){
  	->keys('#tgl_lahir','04271998')
  	->select('jenis_kelamin','Laki-Laki')
  	->select('prodi','TI')
- 	->select('user_id','6')
+ 	->select('user_id','3')
  	->press('Submit')
  	;});
  	$this->assertDatabaseHas('anggota',[ 

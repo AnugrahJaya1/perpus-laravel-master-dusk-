@@ -30,7 +30,7 @@ class GenerateController extends Controller
 
     public function generateDusk()
     {
-        $namaFile = $this->readerWriter->bacaNamaFile();
+        $namaFile = $this->readerWriter->bacaNamaFile(1);
 
         $generateDusk = new GenerateDuskController();
 
@@ -92,41 +92,76 @@ class GenerateController extends Controller
         // $model = "App\\" . $namaModel;
         // $m = new $model;
         // $fillable = $m->getFillable();
-        return view("generate", ["dir" => $namaFile]);
+        // return view("generate", ["dir" => $namaFile]);
     }
 
     public function generatePHPUnit()
     {
+        $namaFile = $this->readerWriter->bacaNamaFile(2);
+
         $generatePHPUnit = new GeneratePHPUnitController();
-        $namaFile = 'transaksi.txt'; //$argv[1];
-        // baca folder gerkin
-        // masukan semua nama file
-        // nanti di loop
-        // set file reader
-        $this->readerWriter->setFileReader($namaFile);
-        // get file reader
-        $fileReader = $this->readerWriter->getFileReader();
+
+        // loop untuk semua nama file
+        for ($i = 2; $i < sizeof($namaFile); $i++) {
+            $file = $namaFile[$i];
+
+            // set file reader
+            $this->readerWriter->setFileReader($file);
+            // get file reader
+            $fileReader = $this->readerWriter->getFileReader();
 
 
-        // membaca header
-        $header = $this->readerWriter->bacaFileHeader();
+            // membaca header
+            $header = $this->readerWriter->bacaFileHeader();
 
-        $folderName = $header[0];
-        $newFileName = $header[1];
-        $namaModel = $header[2];
+            $folderName = $header[0];
+            $newFileName = $header[1];
+            $namaModel = $header[2];
 
-        // buat folder + set file writer di readerWriter
-        $newDir = $generatePHPUnit->getNewDir();
-        $this->readerWriter->buatFolder($newDir, $folderName, $newFileName);
+            // buat folder + set file writer di readerWriter
+            $newDir = $generatePHPUnit->getNewDir();
+            $this->readerWriter->buatFolder($newDir, $folderName, $newFileName);
 
-        $fileWriter = $this->readerWriter->getFileWriter();
-        $generatePHPUnit->setFileWriter($fileWriter);
+            $fileWriter = $this->readerWriter->getFileWriter();
+            $generatePHPUnit->setFileWriter($fileWriter);
 
 
 
-        // bikin body
-        $generatePHPUnit->writeBody($newFileName, $fileReader, $namaModel, $folderName);
-        return view("generate", ["dir" => $namaFile]);
+            // bikin body
+            $generatePHPUnit->writeBody($newFileName, $fileReader, $namaModel, $folderName);
+
+        }
+        
+        // $generatePHPUnit = new GeneratePHPUnitController();
+        // $namaFile = 'transaksi.txt'; //$argv[1];
+        // // baca folder gerkin
+        // // masukan semua nama file
+        // // nanti di loop
+        // // set file reader
+        // $this->readerWriter->setFileReader($namaFile);
+        // // get file reader
+        // $fileReader = $this->readerWriter->getFileReader();
+
+
+        // // membaca header
+        // $header = $this->readerWriter->bacaFileHeader();
+
+        // $folderName = $header[0];
+        // $newFileName = $header[1];
+        // $namaModel = $header[2];
+
+        // // buat folder + set file writer di readerWriter
+        // $newDir = $generatePHPUnit->getNewDir();
+        // $this->readerWriter->buatFolder($newDir, $folderName, $newFileName);
+
+        // $fileWriter = $this->readerWriter->getFileWriter();
+        // $generatePHPUnit->setFileWriter($fileWriter);
+
+
+
+        // // bikin body
+        // $generatePHPUnit->writeBody($newFileName, $fileReader, $namaModel, $folderName);
+        // return view("generate", ["dir" => $namaFile]);
     }
 
     public function mode(Request $request)

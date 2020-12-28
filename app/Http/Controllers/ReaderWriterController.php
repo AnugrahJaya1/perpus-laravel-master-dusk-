@@ -11,14 +11,19 @@ class ReaderWriterController extends Controller
 
     public function __construct()
     {
-        $this->dir = "..\\Gherkin\\";
+        
         $this->fileReader = null;
         $this->fileWritter = null;
     }
 
     // ambil dari index 2
-    public function bacaNamaFile()
+    public function bacaNamaFile($mode)//1 dusk, 2 php unit
     {
+        if($mode == 1){
+            $this->dir = "..\\GherkinDusk\\";
+        }else{
+            $this->dir = "..\\GherkinPHPUnit\\";
+        }
         $namaFile = [];
         if (is_dir($this->dir)) {
             if ($dh = opendir($this->dir)) {

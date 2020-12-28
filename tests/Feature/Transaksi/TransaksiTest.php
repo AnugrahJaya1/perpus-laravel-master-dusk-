@@ -18,17 +18,21 @@ public function testUnit1(){
 	'email'=>'admin123@gilacoding.com',
 	'password'=>'admin123',
 	]);
-	$anggota_id = Anggota::where('anggota_id','Test');
-	$count = Transaksi::where('anggota_id',$anggota_id)->count();
+	$count = Transaksi::where('anggota_id',3)->count();
 	$array1 = [
-	'judul'=>'Pemrograman_Python',
+	'kode_transaksi'=>'TR00001',
+	'tgl_pinjam'=>'2021-01-01',
+	'tgl_kembali'=>'2021-01-05',
+	'buku_id'=>'2',
 	'nama'=>'Test',
+	'anggota_id'=>'3',
+	'ket'=>'Pinjam',
 	];
 	$controller = new TransaksiController();
 	if($count<=3){
 		$controller->storeFunction($array1, $gambar=NULL);
 	}
-	$newCount = Transaksi::where('anggota_id',$anggota_id)->count();
+	$newCount = Transaksi::where('anggota_id',3)->count();
 	$this->assertEquals($count, $newCount-1); 
  	 
 } 

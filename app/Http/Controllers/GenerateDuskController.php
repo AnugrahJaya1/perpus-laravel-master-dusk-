@@ -14,7 +14,7 @@ class GenerateDuskController extends Controller
 
     public function __construct()
     {
-        $this->dir = "..\\Gherkin\\";
+        $this->dir = "..\\GherkinDusk\\";
         $this->newDir = '..\\..\\..\\tests\\Browser\\';
     }
 

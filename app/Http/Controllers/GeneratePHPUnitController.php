@@ -11,7 +11,7 @@ class GeneratePHPUnitController extends Controller
 
     public function __construct()
     {
-        $this->dir = "..\\Gherkin\\";
+        $this->dir = "..\\GherkinPHPUnit\\";
         $this->newDir = '..\\..\\..\\tests\\Feature\\';
     }
 
@@ -37,7 +37,7 @@ class GeneratePHPUnitController extends Controller
             "Scenario:", "Given", "When", "And", "Then", "halaman", "Login", //6
             "berhasil", "tulisan", "Sign", "kembali", "email", "password", //12
             "Submit", "atribut", "Register", "gambar", "User", "Anggota", //18
-            "tgl_lahir", "Buku", "Transaksi", "nama", "Berhasil"
+            "tgl", "Buku", "Transaksi", "nama", "Berhasil",
         ];
 
         $this->write("<?php\n");
@@ -61,9 +61,6 @@ class GeneratePHPUnitController extends Controller
         }
 
         $this->write("class " . $newFileName . "Test" . " extends TestCase { \n \n");
-
-
-
 
 
         $banyakTest = 1;
@@ -97,14 +94,21 @@ class GeneratePHPUnitController extends Controller
                                     if (in_array($words[$j], $used) == false) {
                                         $key = $words[$j];
                                         $array[$key] = [];
+                                        $str = "";
+                                        for ($k = $j + 2; $k < sizeof($words); $k++) {
+                                            $str .= $words[$k];
+                                            if ($k != sizeof($words) - 1) {
+                                                $str .= " ";
+                                            }
+                                        }
 
                                         array_push($used, $words[$j]);
-                                        array_push($array[$key], $words[$j + 2]);
+                                        array_push($array[$key], $str);
                                     }
                                 }
                             }
                             if (in_array($words[$j], $used) == false) { //untuk email dan password jika tidak ada di model
-                                if ($words[$j] == $keys[11] || $words[$j] == $keys[12] ||$words[$j]==$keys[22] || $words[$j]=="judul") { //11 email //12 password 22 nama
+                                if ($words[$j] == $keys[11] || $words[$j] == $keys[12] || $words[$j] == $keys[22]) { //11 email //12 password 22 nama
                                     $key = $words[$j];
                                     $array[$key] = [];
 
@@ -136,29 +140,30 @@ class GeneratePHPUnitController extends Controller
                                 } else if ($namaModel == $keys[20]) { // buku
                                     $this->write('$count = ' . $namaModel . "::where('isbn','" . $array['isbn'][0] . "')->count();\n\t");
                                 } else if ($namaModel == $keys[21]) { // transaksi
-                                    $this->write('$anggota_id = Anggota::where('."'anggota_id','".$array['nama'][0]."');\n\t");
-                                    $this->write('$count = ' . $namaModel . "::where('anggota_id',".'$anggota_id'.")->count();\n\t");
+                                    $this->write('$count = ' . $namaModel . "::where('anggota_id'," .$array['anggota_id'][0]. ")->count();\n\t");
                                 }
 
                                 $this->write('$array1 = [' . "\n\t");
+
                                 foreach ($array as $key => $value) {
                                     if ($key == $keys[16]) { //gambar
                                         $this->write("'" . $key . "'=>NULL,\n\t");
-                                    } else if ($key == $keys[19]) { //tgl_lahir
+                                    } else if (str_contains($key, $keys[19])) { //kalau ada tgl
                                         $tgl = substr($value[0], 4, 4) . "-" . substr($value[0], 0, 2) . "-" . substr($value[0], 2, 2); // mm/dd/yyyy -> yyyy-mm-dd
                                         $this->write("'" . $key . "'=>'" . $tgl . "',\n\t");
                                     } else {
                                         $this->write("'" . $key . "'=>'" . $value[0] . "',\n\t");
                                     }
+                                    // $this->write($key . "\n\t");
                                 }
                                 $this->write('];' . "\n\t");
                                 $this->write('$controller = new ' . $namaModel . "Controller();\n\t");
-                                if($namaModel==$keys[21]){//transaksi
+                                if ($namaModel == $keys[21]) { //transaksi
                                     $this->write('if($count<=3){' . "\n\t\t");
-                                }else{
+                                } else {
                                     $this->write('if($count==0){' . "\n\t\t");
                                 }
-                                
+
                                 $this->write('$controller->storeFunction' . '($array1, $gambar=NULL)' . ";\n\t");
                                 $this->write("}\n\t");
 
@@ -166,8 +171,8 @@ class GeneratePHPUnitController extends Controller
                                     $this->write('$newCount = ' . $namaModel . "::where('" . $atrNama . "','" . $array[$atrNama][0] . "')->count();\n\t");
                                 } else if ($namaModel == $keys[20]) { // buku
                                     $this->write('$newCount = ' . $namaModel . "::where('isbn','" . $array['isbn'][0] . "')->count();\n\t");
-                                }else if ($namaModel == $keys[21]) { // transaksi
-                                    $this->write('$newCount = ' . $namaModel . "::where('anggota_id',".'$anggota_id'.")->count();\n\t");
+                                } else if ($namaModel == $keys[21]) { // transaksi
+                                    $this->write('$newCount = ' . $namaModel . "::where('anggota_id'," . $array['anggota_id'][0] . ")->count();\n\t");
                                 }
                                 // $controller->storeFunction($array);
 
@@ -181,18 +186,18 @@ class GeneratePHPUnitController extends Controller
                                 } else {
                                     $this->write('$response->assertRedirect(' . "'/" . $words[sizeof($words) - 1] . "'" . "); \n\t} \n\t \n\t");
                                 }
-                            } else if ($words[$j] == $keys[10]) { // kembali
+                            } else if ($words[$j] == $keys[10] || $words[$j] == "tetap") { // kembali
                                 $this->write('$response->assertRedirect(' . "''" . "); \n\t} \n\t \n\t");
                             } else if ($words[$j] == $keys[14]) { //atribut
-                                if ($namaModel == $keys[17] || $namaModel == $keys[18] || $namaModel == $keys[20]) { // 17 User 18 Anggota 20 Buku
+                                if ($namaModel == $keys[17] || $namaModel == $keys[18] || $namaModel == $keys[20] || $namaModel == "Transaksi") { // 17 User 18 Anggota 20 Buku
                                     $this->write('$this' . "->assertEquals(" . '$count, $newCount-1' . "); \n \t \n} \n \n");
                                 }
-                            } else if($words[$j] == $keys[23]){ //berhasil
+                            } else if ($words[$j] == $keys[23]) { //berhasil
                                 $this->write('$this' . "->assertEquals(" . '$count, $newCount-1' . "); \n \t \n} \n \n");
                             }
                         }
-                        // $array = [];
-                        // $used = [];
+                        $array = [];
+                        $used = [];
                     }
                 }
             }

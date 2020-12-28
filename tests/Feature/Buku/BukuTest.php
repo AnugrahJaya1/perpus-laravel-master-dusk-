@@ -18,15 +18,15 @@ public function testUnit1(){
 	]);
 	$count = Buku::where('isbn','123456789')->count();
 	$array1 = [
-	'judul'=>'Pemgrograman_Python',
+	'judul'=>'Pemgrograman Python',
 	'isbn'=>'123456789',
-	'pengarang'=>'Muhammad_Dipo',
-	'penerbit'=>'PT_Muhammad_Dipo',
+	'pengarang'=>'Muhammad Dipo',
+	'penerbit'=>'PT Muhammad Dipo',
 	'tahun_terbit'=>'2015',
 	'jumlah_buku'=>'5',
-	'deskripsi'=>'Buku_untuk_belajar_Bahasa_Pemrograman_Python',
+	'deskripsi'=>'Buku untuk belajar Bahasa Pemrograman Python',
 	'lokasi'=>'rak1',
-	'cover'=>'dengan',
+	'cover'=>'dengan python',
 	];
 	$controller = new BukuController();
 	if($count==0){
