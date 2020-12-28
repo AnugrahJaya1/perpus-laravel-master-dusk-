@@ -206,7 +206,14 @@ class GenerateDuskController extends Controller
                             } else if ($words[$j] == $keys[22]) { //menunggu
                                 $this->write("->waitForText('" . $words[$j + 3] . " " . $words[$j + 4] . "')\n \t");
                             } else if ($words[$j] == $keys[23]) { //klik
-                                $this->write('->click("tr[data-' . $words[$j + 2] . '_' . $words[$j + 1] . "='" . $words[$j + 3] . " " . $words[$j + 4] . "']" . '")' . "\n\t");
+                                $this->write('->click("tr[data-' . $words[$j + 2] . '_' . $words[$j + 1] . "='" );
+                                for ($k = $j + 3; $k < sizeof($words); $k++) {
+                                    $this->write($words[$k]);
+                                    if($k!=sizeof($words)-1){
+                                        $this->write(" ");
+                                    }
+                                }
+                                $this->write("']". '"' .")\n\t");
                             } else if ($words[$j] == $keys[24]) { //keterangan
                                 $this->write("->type('" . $words[$j] . "', '" . $words[$j + 1] . "') \n \t");
                             }

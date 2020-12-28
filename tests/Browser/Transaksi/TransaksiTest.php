@@ -17,4 +17,13 @@ public function testUnit1(){
  	->clickLink('Tambah Transaksi')
  	->press('Cari Buku')
  	->waitForText('Cari Buku')
- 	
+ 	->click("tr[data-buku_judul='Pemrograman Android']")
+	->press('Cari Anggota')
+ 	->click("tr[data-anggota_nama='Test']")
+	->type('keterangan', 'Pinjam') 
+ 	->press('Submit')
+ 	->assertSee("Berhasil"); 
+ 	}); 
+} 
+ 
+}

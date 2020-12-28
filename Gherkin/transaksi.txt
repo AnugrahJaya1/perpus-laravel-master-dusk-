@@ -11,9 +11,9 @@ Feature: Transaksi Transaksi Transaksi
         And Pengguna menekan link Tambah Transaksi
         And Pengguna menekan tombol Cari Buku
         And Pengguna menunggu muncul kata Cari Buku
-        And Pengguna klik judul buku Pemrograman_Python
+        And Pengguna klik judul buku Pemrograman Android
         And Pengguna menekan tombol Cari Anggota
         And Pengguna klik nama anggota Test
         And Pengguna mengisi keterangan Pinjam
         And Pengguna menekan tombol Submit
-        Then Akan muncul tulisan Berhasil
+        Then Akan muncul tulisan "Berhasil"
