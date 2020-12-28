@@ -15,8 +15,6 @@ public function testUnit1(){
  	->press('Login')
  	->clickLink('Transaksi Buku')
  	->clickLink('Tambah Transaksi')
- 	->type('tgl_pinjam', '01012021') 
- 	->type('tgl_kembali', '01052021') 
  	->press('Cari Buku')
  	->waitForText('Cari Buku')
  	
