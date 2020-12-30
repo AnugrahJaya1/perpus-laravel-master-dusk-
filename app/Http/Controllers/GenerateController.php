@@ -11,14 +11,12 @@ use Svg\Tag\Rect;
 class GenerateController extends Controller
 {
     private $readerWriter;
-    private $input;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->readerWriter = new ReaderWriterController();
-        $this->input = $request->input();
     }
-    
+
     public function generateDusk()
     {
         $namaFile = $this->readerWriter->bacaNamaFile(1);
