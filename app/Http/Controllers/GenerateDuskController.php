@@ -43,10 +43,13 @@ class GenerateDuskController extends Controller
 
         // atribut bantuan
         $keys = [
-            "Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", "login", "menggunakan", //10
-            "link", "opsi", "atribut", "melampirkan", "memilih", "email", "password", "password_confirmation", "User", "sudah login", //20
-            "jenis_kelamin", "menunggu", "klik", "keterangan", "tetap", "tgl"
+            "Scenario:", "Given", "When", "And", "Then", "halaman", "tombol", "berhasil", "tulisan", //8
+            "login", "menggunakan", "link", "opsi", "atribut", "melampirkan", "memilih", "email",//16
+            "password", "password_confirmation", "User", "sudah login", //20
+            "jenis_kelamin", "menunggu", "klik", "keterangan", "tetap", "tgl" //26
         ];
+
+        //keys 9, 10, 15
 
 
         $pathModel = "App\\" . $namaModel;
@@ -54,7 +57,6 @@ class GenerateDuskController extends Controller
         $fillable = $model->getFillable();
 
         $banyakTest = 1;
-        $status = "";
 
         $used = [];
 
