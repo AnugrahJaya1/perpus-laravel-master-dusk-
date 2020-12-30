@@ -81,8 +81,4 @@ class ReaderWriterController extends Controller
     {
         return $this->fileWriter;
     }
-    
-    public function write($text){
-        fwrite($this->fileWriter,$text);
-    }
 }
