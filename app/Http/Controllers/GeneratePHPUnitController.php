@@ -35,7 +35,7 @@ class GeneratePHPUnitController extends Controller
             "Scenario:", "Given", "When", "And", "Then", "halaman", "Login", //6
             "berhasil", "tulisan", "Sign", "kembali", "email", "password", //12
             "Submit", "atribut", "Register", "gambar", "User", "Anggota", //18
-            "tgl", "Buku", "Transaksi", "nama", "Berhasil", "tetap"
+            "tgl", "Buku", "Transaksi", "nama", "Berhasil", "tetap" // 24
         ];
 
         $this->write("<?php\n");
@@ -178,10 +178,10 @@ class GeneratePHPUnitController extends Controller
                                 } else {
                                     $this->write('$response->assertRedirect(' . "'/" . $words[sizeof($words) - 1] . "'" . "); \n\t} \n\t \n\t");
                                 }
-                            } else if ($words[$j] == $keys[10] || $words[$j] == "tetap") { // kembali
+                            } else if ($words[$j] == $keys[10] || $words[$j] == $keys[24]) { // 10 kembali 24 tetap
                                 $this->write('$response->assertRedirect(' . "''" . "); \n\t} \n\t \n\t");
                             } else if ($words[$j] == $keys[14]) { //atribut
-                                if ($namaModel == $keys[17] || $namaModel == $keys[18] || $namaModel == $keys[20] || $namaModel == "Transaksi") { // 17 User 18 Anggota 20 Buku
+                                if ($namaModel == $keys[17] || $namaModel == $keys[18] || $namaModel == $keys[20] || $namaModel == $keys[21]) { // 17 User 18 Anggota 20 Buku 21 Transaksi
                                     $this->write('$this' . "->assertEquals(" . '$count, $newCount-1' . "); \n \t \n} \n \n");
                                 }
                             } else if ($words[$j] == $keys[23]) { //berhasil

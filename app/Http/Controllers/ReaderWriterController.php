@@ -33,7 +33,6 @@ class ReaderWriterController extends Controller
                 closedir($dh);
             }
         }
-        // return view('test', ["temp" => $temp]);
         return $namaFile;
     }
 
