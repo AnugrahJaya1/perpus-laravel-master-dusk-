@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class GeneratePHPUnitController extends Controller
 {
-    private $dir, $newDir, $fileWriter;
+    private $newDir, $fileWriter;
 
     public function __construct()
     {
-        $this->dir = "..\\GherkinPHPUnit\\";
         $this->newDir = '..\\..\\..\\tests\\Feature\\';
     }
 
@@ -37,7 +35,7 @@ class GeneratePHPUnitController extends Controller
             "Scenario:", "Given", "When", "And", "Then", "halaman", "Login", //6
             "berhasil", "tulisan", "Sign", "kembali", "email", "password", //12
             "Submit", "atribut", "Register", "gambar", "User", "Anggota", //18
-            "tgl", "Buku", "Transaksi", "nama", "Berhasil",
+            "tgl", "Buku", "Transaksi", "nama", "Berhasil", "tetap"
         ];
 
         $this->write("<?php\n");
@@ -64,16 +62,14 @@ class GeneratePHPUnitController extends Controller
 
 
         $banyakTest = 1;
-        $status = "";
 
-        $used = [];
-        $array = [];
+        $used = []; // digunakan untuk atr di dalam model
+        $array = []; // digunakan untuk menyimpan key dan value dari model
         $logout = false;
 
         if ($fileReader) {
             while (($line = fgets($fileReader)) !== false) {
                 $words = preg_split('/\s+/', $line, -1, PREG_SPLIT_NO_EMPTY);
-                // system("echo ".$words[0]);
 
                 // idx untuk words
                 for ($i = 0; $i < sizeof($words); $i++) {
@@ -118,7 +114,6 @@ class GeneratePHPUnitController extends Controller
                             }
 
                             if ($words[$j] == $keys[6]) { //login
-                                // $this->write("\n\t");
                                 foreach ($array as $key => $value) {
                                     $this->write("'" . $key . "'=>'" . $value[0] . "',\n\t");
                                 }
@@ -140,7 +135,7 @@ class GeneratePHPUnitController extends Controller
                                 } else if ($namaModel == $keys[20]) { // buku
                                     $this->write('$count = ' . $namaModel . "::where('isbn','" . $array['isbn'][0] . "')->count();\n\t");
                                 } else if ($namaModel == $keys[21]) { // transaksi
-                                    $this->write('$count = ' . $namaModel . "::where('anggota_id'," .$array['anggota_id'][0]. ")->count();\n\t");
+                                    $this->write('$count = ' . $namaModel . "::where('anggota_id'," . $array['anggota_id'][0] . ")->count();\n\t");
                                 }
 
                                 $this->write('$array1 = [' . "\n\t");
@@ -154,7 +149,6 @@ class GeneratePHPUnitController extends Controller
                                     } else {
                                         $this->write("'" . $key . "'=>'" . $value[0] . "',\n\t");
                                     }
-                                    // $this->write($key . "\n\t");
                                 }
                                 $this->write('];' . "\n\t");
                                 $this->write('$controller = new ' . $namaModel . "Controller();\n\t");
@@ -174,8 +168,6 @@ class GeneratePHPUnitController extends Controller
                                 } else if ($namaModel == $keys[21]) { // transaksi
                                     $this->write('$newCount = ' . $namaModel . "::where('anggota_id'," . $array['anggota_id'][0] . ")->count();\n\t");
                                 }
-                                // $controller->storeFunction($array);
-
                             }
                         }
                     } else if ($words[$i] == $keys[4]) { //Then
