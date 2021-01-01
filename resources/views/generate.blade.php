@@ -29,12 +29,12 @@
 <body>
     <table>
         <tr>
-            <th>Feature</th>
+            <th></th>
             <th>Button Dusk</th>
             <th>Button PHPUnit</th>
         </tr>
         <tr>
-            <td>Login</td>
+            <td>Generate</td>
             <form action="" method="post">
                 {{ csrf_field() }}
                 <td><input type="submit" value="dusk" name="btn" class="btn bg-success"></td>
