@@ -15,8 +15,9 @@ class CreateTransaksisTable extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kode_transaksi');
             $table->integer('anggota_id')->unsigned();
+            $table->string('kode_transaksi');
+            
             $table->foreign('anggota_id')->references('id')->on('anggota')->onDelete('cascade');
             $table->integer('buku_id')->unsigned();
             $table->foreign('buku_id')->references('id')->on('buku')->onDelete('cascade');

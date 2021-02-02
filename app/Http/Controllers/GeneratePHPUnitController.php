@@ -140,7 +140,7 @@ class GeneratePHPUnitController extends Controller
                                 $logout = true;
                             } else if ($words[$j] == $keys[13] || $words[$j] == $keys[15]) { // 13 submit 15 Register
                                 $arrKey = array_keys($array);
-                                $this->write('$count = ' . $namaModel . "::where('" . $arrKey[0] . "','" . $array[$arrKey[0]][0] . "')->count();\n\t");
+                                $this->write('$count = ' . $namaModel . "::where('" . $arrKey[1] . "','" . $array[$arrKey[1]][0] . "')->count();\n\t");
 
                                 // if ($namaModel == $keys[17]) { //user
                                 //     $atrNama = "name";
